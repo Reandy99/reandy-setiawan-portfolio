@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-plus-jakarta-sans);
+  --color-background: #f5f4f0;
+  --color-surface: #ffffff;
+  --color-surface-alt: #efede8;
+  --color-border: #dfddd8;
+  --color-foreground: #242320;
+  --color-muted: #7a766f;
+  --color-button-primary: #171717;
+  --color-button-primary-hover: #2a2a2a;
+}
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: #d9d6ce;
+  color: #171717;
+}
+
+.page-shell {
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.72), transparent 36%),
+    radial-gradient(circle at top right, rgba(235, 232, 224, 0.42), transparent 26%);
+}
+
+@layer components {
+  .section-shell {
+    @apply mx-auto max-w-7xl px-5 py-12 md:px-8 md:py-14;
+  }
+
+  .surface-card {
+    @apply rounded-[22px] border p-5 md:p-6;
+    border-color: var(--color-border);
+    background: var(--color-surface);
+    box-shadow: 0 1px 4px rgba(10, 10, 10, 0.02);
+  }
+
+  .button-primary {
+    @apply inline-flex items-center justify-center rounded-md border px-4 py-2 text-xs font-semibold transition;
+    border-color: rgba(0, 0, 0, 0.05);
+    background: var(--color-button-primary);
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+
+  .button-primary:hover {
+    background: var(--color-button-primary-hover);
+  }
+
+  .button-secondary {
+    @apply inline-flex items-center justify-center rounded-md border px-4 py-2 text-xs font-semibold transition;
+    border-color: rgba(0, 0, 0, 0.05);
+    background: var(--color-button-primary);
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+
+  .button-secondary:hover {
+    background: var(--color-button-primary-hover);
+  }
+}
