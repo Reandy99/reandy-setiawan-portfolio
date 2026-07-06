@@ -34,6 +34,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/work/pt-mitra-ruber-industri-customer-success-story",
+        destination: "/work/pt-gaya-motor-company-profile",
+        permanent: true,
+      },
+      {
         source: "/about",
         destination: "/",
         permanent: true,

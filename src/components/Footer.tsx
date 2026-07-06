@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { siteConfig } from "@/lib/utils";
+
 export function Footer() {
   return (
     <footer className="border-t border-black/6">
@@ -13,12 +15,22 @@ export function Footer() {
           </p>
         </div>
 
-        <Link
-          href="/"
-          className="text-xs text-[var(--color-muted)] transition hover:text-[var(--color-foreground)]"
-        >
-          Top ↑
-        </Link>
+        <div className="flex flex-wrap items-center gap-4">
+          <a
+            href={siteConfig.github}
+            target="_blank"
+            rel="noreferrer"
+            className="text-xs text-[var(--color-muted)] transition hover:text-[var(--color-foreground)]"
+          >
+            GitHub
+          </a>
+          <Link
+            href="/"
+            className="text-xs text-[var(--color-muted)] transition hover:text-[var(--color-foreground)]"
+          >
+            Top ↑
+          </Link>
+        </div>
       </div>
     </footer>
   );

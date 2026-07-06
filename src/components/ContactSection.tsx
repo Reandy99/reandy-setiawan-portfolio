@@ -1,6 +1,5 @@
 "use client";
 
-import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/utils";
@@ -14,13 +13,6 @@ export function ContactSection({
   title = "Contact",
   subtitle = "Let's create something impactful together.",
 }: ContactSectionProps) {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSubmitted(true);
-  }
-
   return (
     <motion.section
       id="contact"
@@ -55,24 +47,58 @@ export function ContactSection({
               <dt className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
                 Email
               </dt>
-              <dd className="mt-1 text-[var(--color-foreground)]">
-                {siteConfig.email}
+              <dd className="mt-1">
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="text-[var(--color-foreground)] transition hover:opacity-70"
+                >
+                  {siteConfig.email}
+                </a>
               </dd>
             </div>
             <div>
               <dt className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
                 LinkedIn
               </dt>
-              <dd className="mt-1 text-[var(--color-foreground)]">
-                linkedin.com/in/reandysetiawan
+              <dd className="mt-1">
+                <a
+                  href={siteConfig.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[var(--color-foreground)] transition hover:opacity-70"
+                >
+                  linkedin.com/in/reandysetiawan
+                </a>
               </dd>
             </div>
             <div>
               <dt className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
                 Instagram
               </dt>
-              <dd className="mt-1 text-[var(--color-foreground)]">
-                @reandy.setiawan
+              <dd className="mt-1">
+                <a
+                  href={siteConfig.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[var(--color-foreground)] transition hover:opacity-70"
+                >
+                  @reandy.setiawan
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
+                GitHub
+              </dt>
+              <dd className="mt-1">
+                <a
+                  href={siteConfig.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[var(--color-foreground)] transition hover:opacity-70"
+                >
+                  github.com/Reandy99/reandy-setiawan-portfolio
+                </a>
               </dd>
             </div>
             <div>
@@ -94,45 +120,35 @@ export function ContactSection({
           </dl>
         </article>
 
-        <article className="surface-card">
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            <div className="grid gap-4 md:grid-cols-2">
-              <label className="space-y-2 text-sm text-[var(--color-muted)]">
-                <span>Your Name</span>
-                <input
-                  type="text"
-                  name="name"
-                  className="w-full rounded-md border border-black/8 bg-white px-3 py-2.5 text-sm text-[var(--color-foreground)] outline-none transition focus:border-black/16"
-                />
-              </label>
-              <label className="space-y-2 text-sm text-[var(--color-muted)]">
-                <span>Your Email</span>
-                <input
-                  type="email"
-                  name="email"
-                  className="w-full rounded-md border border-black/8 bg-white px-3 py-2.5 text-sm text-[var(--color-foreground)] outline-none transition focus:border-black/16"
-                />
-              </label>
-            </div>
-            <label className="space-y-2 text-sm text-[var(--color-muted)]">
-              <span>Your Message</span>
-              <textarea
-                name="message"
-                rows={6}
-                className="w-full rounded-md border border-black/8 bg-white px-3 py-2.5 text-sm text-[var(--color-foreground)] outline-none transition focus:border-black/16"
-              />
-            </label>
-            <div className="flex flex-wrap items-center gap-4">
-              <button type="submit" className="button-primary">
-                Send Message
-              </button>
-              {submitted ? (
-                <p className="text-sm text-[var(--color-muted)]">
-                  Form UI ready. Connect the handler to your preferred backend or email service.
-                </p>
-              ) : null}
-            </div>
-          </form>
+        <article className="surface-card flex flex-col justify-between gap-6">
+          <div className="space-y-3">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
+              Quick Actions
+            </p>
+            <h3 className="text-xl font-semibold text-[var(--color-foreground)]">
+              Reach out directly
+            </h3>
+            <p className="text-sm leading-6 text-[var(--color-muted)]">
+              For hiring inquiries, collaborations, or portfolio reviews — email
+              me directly or connect on LinkedIn.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <a href={`mailto:${siteConfig.email}`} className="button-primary">
+              Email Me
+            </a>
+            <a
+              href={siteConfig.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="button-secondary"
+            >
+              LinkedIn
+            </a>
+            <a href={siteConfig.cvPath} download className="button-secondary">
+              Download CV
+            </a>
+          </div>
         </article>
       </div>
     </motion.section>

@@ -17,7 +17,8 @@ import Link from "next/link";
 
 export default function HomePage() {
   const featuredCaseStudy =
-    projects.find((project) => project.slug === "iff-plant-factory") ?? projects[0];
+    projects.find((project) => project.slug === "ai-content-batch-for-system") ??
+    projects[0];
   const selectedProjects = featuredProjects.slice(0, 4);
   const visibleProjects = projects.filter((project) => !project.hidden);
   const heroLinks = [
@@ -36,12 +37,13 @@ export default function HomePage() {
                 Hi, I&apos;m Reandy Setiawan
               </p>
               <h1 className="max-w-4xl font-serif text-4xl leading-[1.02] tracking-[-0.03em] text-[var(--color-foreground)] md:text-5xl lg:text-[3.5rem]">
-                Creative Marketing, Photography, Video &amp; AI-Assisted Works
+                {siteConfig.heroHeadline}
               </h1>
               <p className="max-w-2xl text-sm leading-7 text-[var(--color-muted)] md:text-base">
-                I combine 10+ years of hands-on experience in content creation and
-                marketing with AI-powered workflows to craft visual stories that
-                engage and deliver results.
+                {siteConfig.heroSubhead}
+              </p>
+              <p className="max-w-2xl text-sm leading-7 text-[var(--color-muted)]">
+                {siteConfig.openFor}
               </p>
             </div>
             <div className="flex flex-wrap gap-4">

@@ -1,8 +1,8 @@
 export const stats = [
-  { value: "10+", label: "Years Experience" },
-  { value: "200+", label: "Projects Completed" },
-  { value: "50+", label: "Clients Served" },
-  { value: "10+", label: "Awards & Features" },
+  { value: "10+", label: "Years in Production" },
+  { value: "7+", label: "Corporate Clients" },
+  { value: "3", label: "Portfolio Brands" },
+  { value: "AI", label: "Workflow Systems Built" },
 ] as const;
 
 export const capabilityCards = [
@@ -99,5 +99,13 @@ export const education = [
   {
     school: "Multimedia Nusantara University",
     field: "Visual Communication Design\nCinematography",
+  },
+] as const;
+
+export const certifications = [
+  {
+    title: "AI Chatbot with n8n for Social Media Automation",
+    issuer: "Artifisial Academy",
+    date: "August 14, 2025",
   },
 ] as const;

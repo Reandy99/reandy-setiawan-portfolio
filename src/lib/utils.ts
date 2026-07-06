@@ -1,14 +1,20 @@
 export const siteConfig = {
   name: "Reandy Setiawan",
-  title: "Reandy Setiawan - Portfolio",
+  title: "Reandy Setiawan - Creative Producer & AI Workflow Builder",
   description:
-    "Personal portfolio of Reandy Setiawan, creative marketing professional, photographer, videographer, and AI-assisted workflow creator.",
-  role: "Creative Marketing, Photographer, Videographer, AI-Assisted Workflow",
+    "Creative producer and AI workflow builder who turns visual production into scalable content systems — from shoot to publish.",
+  role: "Creative Producer & AI Workflow Builder",
+  heroHeadline: "Creative Producer & AI Workflow Builder",
+  heroSubhead:
+    "I turn visual production into scalable content systems — from shoot to publish.",
+  openFor:
+    "Open for Creative Marketing, Content Operations, and Visual Production roles with AI workflow expertise.",
   location: "Jakarta, Indonesia",
   availability: "Open to Remote / APAC Roles",
   email: "reandysetiawan1@gmail.com",
   linkedin: "https://linkedin.com/in/reandysetiawan",
   instagram: "https://instagram.com/reandy.setiawan",
+  github: "https://github.com/Reandy99/reandy-setiawan-portfolio",
   baseUrl: "https://reandy-setiawan.vercel.app",
   cvPath: "/assets/resume/reandy-setiawan-cv.pdf",
   profileImage: "/images/reandy-profile.jpg",

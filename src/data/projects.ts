@@ -159,7 +159,7 @@ export const projects: Project[] = [
   },
   {
     title: "PT Gaya Motor (ASTRA) - Company Profile Video",
-    slug: "pt-mitra-ruber-industri-customer-success-story",
+    slug: "pt-gaya-motor-company-profile",
     category: ["Video"],
     year: "2022",
     summary:

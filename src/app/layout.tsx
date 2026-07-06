@@ -61,7 +61,7 @@ const personJsonLd = {
     addressLocality: "Jakarta",
     addressCountry: "Indonesia",
   },
-  sameAs: [siteConfig.linkedin, siteConfig.instagram],
+  sameAs: [siteConfig.linkedin, siteConfig.instagram, siteConfig.github],
 };
 
 export default function RootLayout({
