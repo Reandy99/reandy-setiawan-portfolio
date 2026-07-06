@@ -13,7 +13,7 @@ export function ResumeSection() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
             Experience
           </p>
-          <h2 className="font-serif text-[1.85rem] text-[var(--color-foreground)]">
+          <h2 className="text-balance font-serif text-[1.45rem] text-[var(--color-foreground)] sm:text-[1.85rem]">
             Professional background
           </h2>
         </div>
@@ -41,7 +41,7 @@ export function ResumeSection() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
               Skills
             </p>
-            <h2 className="font-serif text-[1.85rem] text-[var(--color-foreground)]">
+            <h2 className="text-balance font-serif text-[1.45rem] text-[var(--color-foreground)] sm:text-[1.85rem]">
               Core capabilities
             </h2>
           </div>
@@ -63,7 +63,7 @@ export function ResumeSection() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
               Certifications
             </p>
-            <h2 className="font-serif text-[1.85rem] text-[var(--color-foreground)]">
+            <h2 className="text-balance font-serif text-[1.45rem] text-[var(--color-foreground)] sm:text-[1.85rem]">
               Professional training
             </h2>
           </div>
@@ -90,7 +90,7 @@ export function ResumeSection() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
               Education
             </p>
-            <h2 className="font-serif text-[1.85rem] text-[var(--color-foreground)]">
+            <h2 className="text-balance font-serif text-[1.45rem] text-[var(--color-foreground)] sm:text-[1.85rem]">
               Academic background
             </h2>
           </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
 
+import { AmbientAudioControl } from "@/components/AmbientAudioControl";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { siteConfig } from "@/lib/utils";
@@ -80,6 +81,7 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
           <Footer />
+          <AmbientAudioControl />
         </div>
       </body>
     </html>

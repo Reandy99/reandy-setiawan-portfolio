@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 import type { Project } from "@/data/projects";
 import { getProjectThumbnailSrc } from "@/lib/project-media";
+import { cn } from "@/lib/utils";
 
 type ProjectCardProps = {
   project: Project;
@@ -30,12 +31,20 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
         rel={isExternal ? "noreferrer" : undefined}
         className="surface-card block overflow-hidden p-0 transition hover:border-black/12"
       >
-        <div className="relative aspect-[4/3] overflow-hidden rounded-[18px] rounded-b-none bg-[#ecebe7]">
+        <div
+          className={cn(
+            "relative aspect-[4/3] overflow-hidden rounded-[18px] rounded-b-none",
+            project.thumbnailFit === "contain" ? "bg-[#eef1f5]" : "bg-[#ecebe7]",
+          )}
+        >
           <Image
             src={getProjectThumbnailSrc(project)}
             alt={`${project.title} project thumbnail`}
             fill
-            className="object-cover transition duration-500 group-hover:scale-[1.02]"
+            className={cn(
+              "transition duration-500 group-hover:scale-[1.02]",
+              project.thumbnailFit === "contain" ? "object-contain p-1" : "object-cover",
+            )}
             sizes="(min-width: 1280px) 24vw, (min-width: 768px) 33vw, 100vw"
           />
         </div>

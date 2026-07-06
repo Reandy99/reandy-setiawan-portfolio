@@ -1,7 +1,6 @@
 import { ContactSection } from "@/components/ContactSection";
 import {
   EditorialCapabilityList,
-  EditorialCaseStudyCard,
   EditorialProjectStack,
   EditorialStatStrip,
 } from "@/components/EditorialSections";
@@ -16,103 +15,119 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function HomePage() {
-  const featuredCaseStudy =
-    projects.find((project) => project.slug === "ai-content-batch-for-system") ??
-    projects[0];
   const selectedProjects = featuredProjects.slice(0, 4);
   const visibleProjects = projects.filter((project) => !project.hidden);
   const heroLinks = [
     { href: "/#selected-work", label: "Curated Work" },
-    { href: "/#case-study", label: "Case Study" },
+    { href: "/#work", label: "All Work" },
     { href: "/#resume", label: "Resume" },
   ] as const;
 
   return (
     <>
-      <section className="section-shell pt-10 md:pt-14">
-        <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr] lg:gap-6">
-          <div className="space-y-10">
-            <div className="space-y-5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">
-                Hi, I&apos;m Reandy Setiawan
-              </p>
-              <h1 className="max-w-4xl font-serif text-4xl leading-[1.02] tracking-[-0.03em] text-[var(--color-foreground)] md:text-5xl lg:text-[3.5rem]">
-                {siteConfig.heroHeadline}
-              </h1>
-              <p className="max-w-2xl text-sm leading-7 text-[var(--color-muted)] md:text-base">
-                {siteConfig.heroSubhead}
-              </p>
-              <p className="max-w-2xl text-sm leading-7 text-[var(--color-muted)]">
-                {siteConfig.openFor}
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-4">
-              <Link href="/#selected-work" className="button-primary">
-                View Selected Work
-              </Link>
-              <a href={siteConfig.cvPath} download className="button-secondary">
-                Download CV
-              </a>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {heroLinks.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="rounded-[12px] border bg-white px-3 py-3 text-sm text-[var(--color-foreground)] transition hover:border-black/12"
-                  style={{ borderColor: "var(--color-border)" }}
-                >
-                  <span className="block text-[11px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                    Jump
-                  </span>
-                  <span className="mt-2 block font-medium">{item.label}</span>
-                </Link>
-              ))}
-            </div>
-            <EditorialStatStrip items={stats} compact />
-          </div>
-
-          <div
-            className="rounded-[22px] border bg-white p-3"
-            style={{ borderColor: "var(--color-border)" }}
-          >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[14px] bg-[#ecebe7]">
-              <Image
-                src={siteConfig.profileImage}
-                alt="Portrait of Reandy Setiawan"
-                fill
-                className="object-cover object-[center_12%]"
-                sizes="(min-width: 1024px) 35vw, 100vw"
-                priority
-              />
-            </div>
-            <div className="grid gap-4 p-3 md:grid-cols-2">
+      <section className="section-shell pt-8 sm:pt-10 md:pt-12">
+        <div className="grid items-center gap-8 md:grid-cols-[1.08fr_0.92fr] md:gap-8 lg:gap-10">
+          <div className="flex max-w-2xl flex-col gap-6 sm:gap-7">
+            <div className="space-y-4 sm:space-y-5">
               <div className="space-y-2">
-                <p className="text-xs uppercase tracking-[0.22em] text-[var(--color-muted)]">
-                  Based In
+                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)] sm:text-[11px] sm:tracking-[0.28em]">
+                  {siteConfig.name}
                 </p>
-                <p className="mt-2 text-sm font-medium text-[var(--color-foreground)]">
-                  {siteConfig.location}
+                <p className="text-xs text-[var(--color-muted)] sm:text-sm">
+                  {siteConfig.heroMeta}
                 </p>
               </div>
-              <div className="space-y-2">
-                <p className="text-xs uppercase tracking-[0.22em] text-[var(--color-muted)]">
-                  Availability
-                </p>
-                <p className="mt-2 text-sm font-medium text-[var(--color-foreground)]">
-                  {siteConfig.availability}
-                </p>
+              <h1 className="text-balance font-serif text-[2rem] leading-[1.06] tracking-[-0.03em] text-[var(--color-foreground)] sm:text-4xl md:text-[2.85rem] lg:text-[3.15rem]">
+                {siteConfig.heroHeadline}
+              </h1>
+              <div className="space-y-3 text-sm leading-6 text-[var(--color-muted)] sm:leading-7 md:text-[15px]">
+                <p>{siteConfig.heroSubhead}</p>
+                <p className="text-[var(--color-foreground)]">{siteConfig.openFor}</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+                <Link href="/#selected-work" className="button-primary">
+                  View Selected Work
+                </Link>
+                <a href={siteConfig.cvPath} download className="button-secondary">
+                  Download CV
+                </a>
+              </div>
+
+              <nav
+                aria-label="Quick links"
+                className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[var(--color-muted)] sm:text-[13px]"
+              >
+                <span className="font-medium uppercase tracking-[0.16em]">
+                  Explore
+                </span>
+                {heroLinks.map((item, index) => (
+                  <span key={item.href} className="inline-flex items-center gap-2">
+                    {index > 0 ? <span aria-hidden="true">·</span> : null}
+                    <Link
+                      href={item.href}
+                      className="font-medium text-[var(--color-foreground)] underline decoration-black/10 underline-offset-4 transition hover:decoration-black/30"
+                    >
+                      {item.label}
+                    </Link>
+                  </span>
+                ))}
+              </nav>
+            </div>
+          </div>
+
+          <div className="md:sticky md:top-24">
+            <div
+              className="overflow-hidden rounded-[22px] border bg-white"
+              style={{ borderColor: "var(--color-border)" }}
+            >
+              <div className="relative aspect-[5/6] overflow-hidden bg-[#ecebe7] sm:aspect-[4/5]">
+                <Image
+                  src={siteConfig.profileImage}
+                  alt="Portrait of Reandy Setiawan"
+                  fill
+                  className="object-cover object-[center_12%]"
+                  sizes="(min-width: 768px) 32vw, 88vw"
+                  priority
+                />
+              </div>
+              <div
+                className="grid grid-cols-2 divide-x border-t text-sm"
+                style={{ borderColor: "var(--color-border)" }}
+              >
+                <div className="space-y-1 px-4 py-3">
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                    Based In
+                  </p>
+                  <p className="font-medium text-[var(--color-foreground)]">
+                    {siteConfig.location}
+                  </p>
+                </div>
+                <div className="space-y-1 px-4 py-3">
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                    Availability
+                  </p>
+                  <p className="font-medium text-[var(--color-foreground)]">
+                    {siteConfig.availability}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-6 space-y-4">
+        <div className="mt-8 md:mt-10">
+          <EditorialStatStrip items={stats} compact />
+        </div>
+
+        <div className="mt-5 space-y-3 md:mt-6 md:space-y-4">
           <div className="space-y-2">
             <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
               Other Portfolios
             </p>
-            <h2 className="font-serif text-[1.85rem] text-[var(--color-foreground)] md:text-[2.2rem]">
+            <h2 className="text-balance font-serif text-[1.55rem] text-[var(--color-foreground)] sm:text-[1.85rem] md:text-[2.2rem]">
               More of my work across corporate and photography websites.
             </h2>
           </div>
@@ -179,7 +194,7 @@ export default function HomePage() {
       <section className="section-shell">
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <article
-            className="rounded-[32px] border bg-white p-7"
+            className="rounded-[22px] border bg-white p-5 sm:p-6 md:p-7"
             style={{ borderColor: "var(--color-border)" }}
           >
             <div className="space-y-4">
@@ -215,7 +230,7 @@ export default function HomePage() {
             title="A structured archive across video, photography, campaign, and workflow projects."
             description="The archive stays filterable and easy to scan, with a denser panel treatment that is closer to the reference UI language."
           />
-          <p className="max-w-xl text-sm leading-7 text-[var(--color-muted)] lg:justify-self-end lg:text-right">
+          <p className="hidden max-w-xl text-sm leading-7 text-[var(--color-muted)] lg:block lg:justify-self-end lg:text-right">
             The layout is still long-scroll, but the cards, spacing, and panel framing
             are tighter so the browsing behavior feels closer to the provided desktop reference.
           </p>
@@ -226,10 +241,6 @@ export default function HomePage() {
         >
           <WorkGrid projects={visibleProjects} />
         </div>
-      </section>
-
-      <section id="case-study" className="section-shell">
-        <EditorialCaseStudyCard project={featuredCaseStudy} accent="soft" />
       </section>
 
       <section id="resume" className="section-shell space-y-8">

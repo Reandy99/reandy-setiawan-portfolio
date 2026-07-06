@@ -2,15 +2,16 @@ export const siteConfig = {
   name: "Reandy Setiawan",
   title: "Reandy Setiawan - Creative Producer & AI Workflow Builder",
   description:
-    "Creative producer and AI workflow builder who turns visual production into scalable content systems — from shoot to publish.",
+    "Creative producer and AI workflow builder with a decade in photo, video, and campaign work — building systems that turn one shoot into weeks of content.",
   role: "Creative Producer & AI Workflow Builder",
   heroHeadline: "Creative Producer & AI Workflow Builder",
   heroSubhead:
-    "I turn visual production into scalable content systems — from shoot to publish.",
+    "A decade in photo, video, and campaign work — now building the workflows that turn one shoot into weeks of content.",
   openFor:
-    "Open for Creative Marketing, Content Operations, and Visual Production roles with AI workflow expertise.",
+    "Open to creative marketing, content operations, and visual production roles.",
+  heroMeta: "Remote-friendly · Based in Jakarta, Indonesia",
   location: "Jakarta, Indonesia",
-  availability: "Open to Remote / APAC Roles",
+  availability: "Remote & APAC roles",
   email: "reandysetiawan1@gmail.com",
   linkedin: "https://linkedin.com/in/reandysetiawan",
   instagram: "https://instagram.com/reandy.setiawan",
@@ -18,6 +19,11 @@ export const siteConfig = {
   baseUrl: "https://reandy-setiawan.vercel.app",
   cvPath: "/assets/resume/reandy-setiawan-cv.pdf",
   profileImage: "/images/reandy-profile.jpg",
+  ambientAudioSrc: "/audio/ambient.mp3",
+  ambientAudioTitle: "Calm Ambient Dreamscape",
+  ambientAudioArtist: "morgan-ambient",
+  ambientAudioSourceUrl:
+    "https://pixabay.com/music/ambient-calm-ambient-dreamscape-529861/",
 } as const;
 
 export const externalPortfolios = [
@@ -47,7 +53,6 @@ export const externalPortfolios = [
 export const navigation = [
   { href: "/", label: "Home" },
   { href: "/#work", label: "Work" },
-  { href: "/#case-study", label: "Case Study" },
   { href: "/#resume", label: "Resume" },
   { href: "/#contact", label: "Contact" },
 ] as const;

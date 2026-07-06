@@ -43,7 +43,7 @@ export function EditorialStatStrip({
   compact = false,
 }: EditorialStatStripProps) {
   return (
-    <div className={cn("grid gap-4 md:grid-cols-2", !compact && "xl:grid-cols-4")}>
+    <div className={cn("grid grid-cols-2 gap-3 sm:gap-4", !compact && "md:grid-cols-2 xl:grid-cols-4")}>
       {items.map((item, index) => (
         <motion.article
           key={item.label}
@@ -52,7 +52,7 @@ export function EditorialStatStrip({
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.32, delay: index * 0.04 }}
           className={cn(
-            "rounded-[26px] border bg-white px-5 py-5",
+            "rounded-[20px] border bg-white px-4 py-4 sm:rounded-[26px] sm:px-5 sm:py-5",
             compact ? "space-y-1.5" : "space-y-2.5",
           )}
           style={{ borderColor: "var(--color-border)" }}
@@ -60,7 +60,7 @@ export function EditorialStatStrip({
           <p
             className={cn(
               "font-semibold text-[var(--color-foreground)]",
-              compact ? "text-2xl" : "text-3xl",
+              compact ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl",
             )}
           >
             {item.value}
@@ -121,8 +121,8 @@ export function EditorialProjectStack({
         >
           <div
             className={cn(
-              "group grid gap-4 rounded-[20px] border bg-white p-4 transition hover:border-black/12",
-              showImages ? "lg:grid-cols-[0.9fr_1.1fr]" : "md:grid-cols-[0.2fr_1fr]",
+              "group grid gap-4 rounded-[18px] border bg-white p-3.5 transition hover:border-black/12 sm:rounded-[20px] sm:p-4",
+              showImages ? "lg:grid-cols-[0.9fr_1.1fr]" : "sm:grid-cols-[0.2fr_1fr]",
             )}
             style={{ borderColor: "var(--color-border)" }}
           >
@@ -143,12 +143,12 @@ export function EditorialProjectStack({
                 {String(index + 1).padStart(2, "0")}
               </p>
             )}
-            <div className="flex items-start justify-between gap-4">
-              <div className="space-y-2">
+            <div className="flex items-start justify-between gap-3 sm:gap-4">
+              <div className="min-w-0 space-y-2">
                 <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
                   {project.category.join(" · ")}
                 </p>
-                <h3 className="text-lg font-semibold text-[var(--color-foreground)] md:text-xl">
+                <h3 className="text-base font-semibold text-[var(--color-foreground)] sm:text-lg md:text-xl">
                   <a
                     href={project.videoUrl ?? `/work/${project.slug}`}
                     target={project.videoUrl ? "_blank" : undefined}
@@ -207,7 +207,7 @@ export function EditorialCaseStudyCard({
           <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--color-muted)]">
             Featured Case Study
           </p>
-          <h3 className="font-serif text-[1.9rem] leading-tight text-[var(--color-foreground)] md:text-[2.25rem]">
+          <h3 className="text-balance font-serif text-[1.55rem] leading-tight text-[var(--color-foreground)] sm:text-[1.9rem] md:text-[2.25rem]">
             {project.title}
           </h3>
           <p className="text-sm leading-6 text-[var(--color-muted)]">
@@ -226,7 +226,7 @@ export function EditorialCaseStudyCard({
           </ul>
         </div>
         <div className="space-y-4">
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-3">
             {project.metrics.map((metric) => (
               <div
                 key={metric.label}
@@ -242,7 +242,7 @@ export function EditorialCaseStudyCard({
               </div>
             ))}
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link href={`/work/${project.slug}`} className="button-primary">
               Open Full Case Study
             </Link>

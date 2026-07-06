@@ -30,7 +30,7 @@ export function WorkGrid({ projects }: WorkGridProps) {
   return (
     <div className="space-y-5">
       <div
-        className="flex flex-wrap gap-2"
+        className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] sm:flex-wrap sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden"
         role="tablist"
         aria-label="Project filters"
       >
@@ -41,7 +41,7 @@ export function WorkGrid({ projects }: WorkGridProps) {
             role="tab"
             aria-selected={activeFilter === filter}
             onClick={() => setActiveFilter(filter)}
-            className={`rounded-md border px-3 py-2 text-[11px] font-medium transition ${
+            className={`shrink-0 rounded-md border px-3 py-2 text-[11px] font-medium transition sm:shrink ${
               activeFilter === filter
                 ? "border-black/12 bg-[var(--color-foreground)] text-white"
                 : "border-black/8 bg-white text-[var(--color-muted)] hover:text-[var(--color-foreground)]"

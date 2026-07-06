@@ -26,7 +26,7 @@ export function ContactSection({
         <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
           {title}
         </p>
-        <h2 className="font-serif text-[1.85rem] text-[var(--color-foreground)] md:text-[2.2rem]">
+        <h2 className="text-balance font-serif text-[1.55rem] text-[var(--color-foreground)] sm:text-[1.85rem] md:text-[2.2rem]">
           {subtitle}
         </h2>
       </div>
@@ -50,7 +50,7 @@ export function ContactSection({
               <dd className="mt-1">
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="text-[var(--color-foreground)] transition hover:opacity-70"
+                  className="break-all text-[var(--color-foreground)] transition hover:opacity-70"
                 >
                   {siteConfig.email}
                 </a>
@@ -65,7 +65,7 @@ export function ContactSection({
                   href={siteConfig.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-[var(--color-foreground)] transition hover:opacity-70"
+                  className="break-all text-[var(--color-foreground)] transition hover:opacity-70"
                 >
                   linkedin.com/in/reandysetiawan
                 </a>
@@ -80,7 +80,7 @@ export function ContactSection({
                   href={siteConfig.instagram}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-[var(--color-foreground)] transition hover:opacity-70"
+                  className="break-all text-[var(--color-foreground)] transition hover:opacity-70"
                 >
                   @reandy.setiawan
                 </a>
@@ -95,7 +95,7 @@ export function ContactSection({
                   href={siteConfig.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-[var(--color-foreground)] transition hover:opacity-70"
+                  className="break-all text-[var(--color-foreground)] transition hover:opacity-70"
                 >
                   github.com/Reandy99/reandy-setiawan-portfolio
                 </a>
@@ -133,7 +133,7 @@ export function ContactSection({
               me directly or connect on LinkedIn.
             </p>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a href={`mailto:${siteConfig.email}`} className="button-primary">
               Email Me
             </a>

@@ -30,6 +30,7 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   text-rendering: optimizeLegibility;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 a {
@@ -50,18 +51,18 @@ a {
 
 @layer components {
   .section-shell {
-    @apply mx-auto max-w-7xl px-5 py-12 md:px-8 md:py-14;
+    @apply mx-auto max-w-7xl px-4 py-10 sm:px-5 sm:py-12 md:px-8 md:py-14;
   }
 
   .surface-card {
-    @apply rounded-[22px] border p-5 md:p-6;
+    @apply rounded-[18px] border p-4 sm:rounded-[22px] sm:p-5 md:p-6;
     border-color: var(--color-border);
     background: var(--color-surface);
     box-shadow: 0 1px 4px rgba(10, 10, 10, 0.02);
   }
 
   .button-primary {
-    @apply inline-flex items-center justify-center rounded-md border px-4 py-2 text-xs font-semibold transition;
+    @apply inline-flex min-h-10 items-center justify-center rounded-md border px-4 py-2.5 text-xs font-semibold transition;
     border-color: rgba(0, 0, 0, 0.05);
     background: var(--color-button-primary);
     color: white;
@@ -73,14 +74,88 @@ a {
   }
 
   .button-secondary {
-    @apply inline-flex items-center justify-center rounded-md border px-4 py-2 text-xs font-semibold transition;
-    border-color: rgba(0, 0, 0, 0.05);
-    background: var(--color-button-primary);
-    color: white;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    @apply inline-flex min-h-10 items-center justify-center rounded-md border px-4 py-2.5 text-xs font-semibold transition;
+    border-color: var(--color-border);
+    background: white;
+    color: var(--color-foreground);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
   }
 
   .button-secondary:hover {
-    background: var(--color-button-primary-hover);
+    border-color: rgba(0, 0, 0, 0.12);
+    background: #fafafa;
+  }
+
+  .ambient-audio-control {
+    @apply fixed bottom-4 right-4 z-[60] sm:bottom-5 sm:left-5 sm:right-auto md:bottom-8 md:left-8;
+  }
+
+  .ambient-audio-button {
+    @apply inline-flex items-center gap-2.5 rounded-full border px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.24em] transition sm:gap-3 sm:px-4 sm:py-2.5 sm:text-[10px] sm:tracking-[0.28em];
+    border-color: rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.88);
+    color: var(--color-foreground);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(12px);
+  }
+
+  .ambient-audio-button:hover {
+    background: rgba(255, 255, 255, 0.96);
+  }
+
+  .ambient-audio-button--active {
+    background: rgba(23, 23, 23, 0.94);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .ambient-audio-bars {
+    @apply flex h-4 items-end gap-[3px];
+  }
+
+  .ambient-audio-bar {
+    @apply w-[3px] rounded-full bg-current opacity-35;
+    height: calc(0.55rem * var(--bar-scale));
+    transform-origin: bottom;
+  }
+
+  .ambient-audio-bar--active {
+    opacity: 0.9;
+    animation: ambient-bar-pulse 1.4s ease-in-out infinite;
+  }
+
+  .ambient-audio-bar--active:nth-child(2) {
+    animation-delay: 0.12s;
+  }
+
+  .ambient-audio-bar--active:nth-child(3) {
+    animation-delay: 0.24s;
+  }
+
+  .ambient-audio-bar--active:nth-child(4) {
+    animation-delay: 0.36s;
+  }
+
+  .ambient-audio-bar--active:nth-child(5) {
+    animation-delay: 0.18s;
+  }
+
+  .ambient-audio-bar--active:nth-child(6) {
+    animation-delay: 0.3s;
+  }
+
+  .ambient-audio-label {
+    @apply min-w-[3.1rem] text-left;
+  }
+}
+
+@keyframes ambient-bar-pulse {
+  0%,
+  100% {
+    transform: scaleY(0.55);
+  }
+
+  50% {
+    transform: scaleY(1.15);
   }
 }
