@@ -88,21 +88,6 @@ export function ContactSection({
             </div>
             <div>
               <dt className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
-                GitHub
-              </dt>
-              <dd className="mt-1">
-                <a
-                  href={siteConfig.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="break-all text-[var(--color-foreground)] transition hover:opacity-70"
-                >
-                  github.com/Reandy99/reandy-setiawan-portfolio
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
                 Location
               </dt>
               <dd className="mt-1 text-[var(--color-foreground)]">
