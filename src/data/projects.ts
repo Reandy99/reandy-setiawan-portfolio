@@ -13,6 +13,7 @@ export type Project = {
   role?: string;
   thumbnail: string;
   thumbnailFit?: "cover" | "contain";
+  thumbnailBg?: string;
   featured?: boolean;
   overview: string;
   deliverables: string[];
@@ -193,7 +194,7 @@ export const projects: Project[] = [
     summary:
       "A practical AI-assisted content workflow concept for batching, repurposing, and streamlining creative output.",
     role: "AI-Assisted Workflow Designer",
-    thumbnail: "/images/projects/project-06-n8n-automation-v3.png",
+    thumbnail: "/images/projects/project-06-n8n-agentic-ai.png",
     overview:
       "Designed a repeatable system for transforming one production output into multiple content formats for websites, social posts, and outreach assets.",
     deliverables: ["Prompt System", "Workflow Logic", "Batch Content Structure"],

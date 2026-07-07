@@ -33,9 +33,14 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
       >
         <div
           className={cn(
-            "relative aspect-[4/3] overflow-hidden rounded-[18px] rounded-b-none",
-            project.thumbnailFit === "contain" ? "bg-[#eef1f5]" : "bg-[#ecebe7]",
+            "relative aspect-[4/3] overflow-hidden rounded-[18px] rounded-b-none bg-[#ecebe7]",
+            project.thumbnailFit === "contain" && "bg-[#eef1f5]",
           )}
+          style={
+            project.thumbnailBg
+              ? { backgroundColor: project.thumbnailBg }
+              : undefined
+          }
         >
           <Image
             src={getProjectThumbnailSrc(project)}

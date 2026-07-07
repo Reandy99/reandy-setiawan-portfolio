@@ -1,78 +1,54 @@
 <svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="900" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#ECE8E1"/>
-      <stop offset="1" stop-color="#DDE7F2"/>
-    </linearGradient>
     <linearGradient id="n8nCore" x1="0" y1="0" x2="1" y2="1">
       <stop stop-color="#2A2D3A"/>
       <stop offset="1" stop-color="#171923"/>
     </linearGradient>
     <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
-      <stop stop-color="#B8C4D4"/>
+      <stop stop-color="#C9D2DF"/>
       <stop offset="0.5" stop-color="#FF7A66"/>
-      <stop offset="1" stop-color="#C8D6E8"/>
+      <stop offset="1" stop-color="#DCE5F2"/>
     </linearGradient>
   </defs>
 
-  <rect width="1200" height="900" fill="url(#bg)"/>
-  <circle cx="1040" cy="120" r="150" fill="#FFE9E4" fill-opacity="0.4"/>
-  <circle cx="120" cy="780" r="120" fill="#E8E3DA" fill-opacity="0.45"/>
+  <rect width="1200" height="900" fill="#ECEBE7"/>
 
-  <rect x="0" y="0" width="1200" height="132" fill="white" fill-opacity="0.55"/>
-  <text x="48" y="54" fill="#8A6E68" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="20" letter-spacing="0.22em">n8n WORKFLOW</text>
-  <text x="48" y="104" fill="#111B28" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="46" font-weight="600">AI Automation System</text>
+  <rect x="72" y="286" width="228" height="136" rx="28" fill="white" stroke="#D8D5CF" stroke-width="1.5"/>
+  <text x="112" y="336" fill="#7A879A" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="18" letter-spacing="0.16em">TRIGGER</text>
+  <text x="112" y="384" fill="#121D2C" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="34" font-weight="600">Source Files</text>
 
-  <rect x="88" y="176" width="196" height="118" rx="26" fill="white" stroke="#DDE4ED" stroke-width="1.5"/>
-  <text x="124" y="220" fill="#7A879A" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="16" letter-spacing="0.16em">TRIGGER</text>
-  <text x="124" y="262" fill="#121D2C" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="30" font-weight="600">Source Files</text>
+  <path d="M300 354H392" stroke="url(#flow)" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="346" cy="354" r="9" fill="#FF6D5A"/>
 
-  <path d="M284 235H364" stroke="url(#flow)" stroke-width="5" stroke-linecap="round"/>
-  <circle cx="324" cy="235" r="8" fill="#FF6D5A"/>
+  <rect x="392" y="298" width="120" height="112" rx="24" fill="#2B2F3C" stroke="#FF6D5A" stroke-width="3"/>
+  <circle cx="452" cy="346" r="14" fill="#FF6D5A"/>
+  <path d="M443 346H461" stroke="#FFF5F2" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M452 337V355" stroke="#FFF5F2" stroke-width="3.5" stroke-linecap="round"/>
+  <text x="418" y="438" fill="#5A6980" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="18" font-weight="600">Trigger</text>
 
-  <rect x="364" y="188" width="108" height="96" rx="22" fill="#2B2F3C" stroke="#FF6D5A" stroke-width="3"/>
-  <circle cx="418" cy="228" r="12" fill="#FF6D5A"/>
-  <path d="M410 228H426" stroke="#FFF5F2" stroke-width="3.5" stroke-linecap="round"/>
-  <path d="M418 220V236" stroke="#FFF5F2" stroke-width="3.5" stroke-linecap="round"/>
-  <text x="388" y="312" fill="#5A6980" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="17" font-weight="600">Trigger</text>
+  <path d="M512 354H604" stroke="url(#flow)" stroke-width="5" stroke-linecap="round"/>
 
-  <path d="M472 235H552" stroke="url(#flow)" stroke-width="5" stroke-linecap="round"/>
+  <rect x="604" y="228" width="228" height="268" rx="34" fill="url(#n8nCore)" stroke="#FF6D5A" stroke-width="2.5"/>
+  <rect x="632" y="256" width="172" height="42" rx="21" fill="#3A3140"/>
+  <text x="718" y="284" text-anchor="middle" fill="#FFD8CF" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="20" font-weight="600">n8n</text>
+  <rect x="652" y="324" width="52" height="52" rx="13" fill="#FF6D5A"/>
+  <rect x="714" y="324" width="52" height="52" rx="13" fill="#3D4354" stroke="#FF8D7E" stroke-width="2"/>
+  <rect x="683" y="386" width="52" height="52" rx="13" fill="#3D4354" stroke="#8AB7FF" stroke-width="2"/>
+  <path d="M678 350H714" stroke="#FFB4A8" stroke-width="3" stroke-linecap="round"/>
+  <path d="M740 350V386" stroke="#FFB4A8" stroke-width="3" stroke-linecap="round"/>
+  <path d="M708 372H683" stroke="#9FC0FF" stroke-width="3" stroke-linecap="round"/>
+  <text x="718" y="478" text-anchor="middle" fill="#D8E5F7" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="28" font-weight="600">Automate</text>
 
-  <rect x="552" y="148" width="196" height="228" rx="32" fill="url(#n8nCore)" stroke="#FF6D5A" stroke-width="2.5"/>
-  <rect x="576" y="172" width="148" height="38" rx="19" fill="#3A3140"/>
-  <text x="650" y="198" text-anchor="middle" fill="#FFD8CF" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="18" font-weight="600">n8n</text>
-  <rect x="592" y="232" width="44" height="44" rx="11" fill="#FF6D5A"/>
-  <rect x="644" y="232" width="44" height="44" rx="11" fill="#3D4354" stroke="#FF8D7E" stroke-width="2"/>
-  <rect x="618" y="286" width="44" height="44" rx="11" fill="#3D4354" stroke="#8AB7FF" stroke-width="2"/>
-  <path d="M614 254H644" stroke="#FFB4A8" stroke-width="3" stroke-linecap="round"/>
-  <path d="M666 254V286" stroke="#FFB4A8" stroke-width="3" stroke-linecap="round"/>
-  <path d="M636 276H618" stroke="#9FC0FF" stroke-width="3" stroke-linecap="round"/>
-  <text x="650" y="352" text-anchor="middle" fill="#D8E5F7" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="24" font-weight="600">Automate</text>
+  <path d="M832 354H924" stroke="url(#flow)" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="878" cy="354" r="9" fill="#FF6D5A"/>
 
-  <path d="M748 235H828" stroke="url(#flow)" stroke-width="5" stroke-linecap="round"/>
-  <circle cx="788" cy="235" r="8" fill="#FF6D5A"/>
+  <rect x="924" y="268" width="236" height="104" rx="24" fill="white" stroke="#D8D5CF" stroke-width="1.5"/>
+  <text x="964" y="306" fill="#7A879A" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="17" letter-spacing="0.15em">OUTPUT</text>
+  <text x="964" y="346" fill="#121D2C" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="30" font-weight="600">Social Copy</text>
 
-  <rect x="828" y="168" width="208" height="90" rx="22" fill="white" stroke="#DDE4ED" stroke-width="1.5"/>
-  <text x="864" y="200" fill="#7A879A" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="15" letter-spacing="0.15em">OUTPUT</text>
-  <text x="864" y="232" fill="#121D2C" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="26" font-weight="600">Social Copy</text>
+  <rect x="924" y="388" width="236" height="104" rx="24" fill="#FFF3F0" stroke="#FFD8CF" stroke-width="1.5"/>
+  <text x="964" y="426" fill="#7A879A" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="17" letter-spacing="0.15em">OUTPUT</text>
+  <text x="964" y="466" fill="#121D2C" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="30" font-weight="600">Web Draft</text>
 
-  <rect x="828" y="272" width="208" height="90" rx="22" fill="#FFF3F0" stroke="#FFD8CF" stroke-width="1.5"/>
-  <text x="864" y="304" fill="#7A879A" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="15" letter-spacing="0.15em">OUTPUT</text>
-  <text x="864" y="336" fill="#121D2C" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="26" font-weight="600">Web Draft</text>
-
-  <rect x="88" y="420" width="1024" height="380" rx="28" fill="white" fill-opacity="0.62"/>
-  <text x="128" y="492" fill="#4A5A70" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="28" font-weight="500">Batching and repurposing content across channels.</text>
-  <text x="128" y="548" fill="#607088" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="24">Trigger → n8n nodes → AI → multi-channel publish</text>
-
-  <rect x="128" y="600" width="220" height="52" rx="16" fill="#F5F7FA"/>
-  <text x="152" y="634" fill="#4A5A70" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="20">ChatGPT</text>
-  <rect x="368" y="600" width="180" height="52" rx="16" fill="#F5F7FA"/>
-  <text x="392" y="634" fill="#4A5A70" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="20">n8n</text>
-  <rect x="568" y="600" width="220" height="52" rx="16" fill="#F5F7FA"/>
-  <text x="592" y="634" fill="#4A5A70" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="20">Google Sheets</text>
-  <rect x="808" y="600" width="180" height="52" rx="16" fill="#F5F7FA"/>
-  <text x="832" y="634" fill="#4A5A70" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="20">Notion</text>
-
-  <rect x="128" y="688" width="944" height="72" rx="20" fill="#171923" fill-opacity="0.92"/>
-  <text x="160" y="734" fill="#F4F7FB" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="24" font-weight="500">One source → automated outputs for web, social, and outreach</text>
+  <text x="600" y="612" text-anchor="middle" fill="#8A8F98" font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-size="22" letter-spacing="0.04em">Trigger → n8n → AI → publish</text>
 </svg>
