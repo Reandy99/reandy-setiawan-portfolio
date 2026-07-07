@@ -133,8 +133,8 @@ export const projects: Project[] = [
     videoUrl: "https://www.youtube.com/watch?v=RSh0WBTziQM",
   },
   {
-    title: "MG Glove Men Profile Series",
-    slug: "mg-glove-men-profile-series",
+    title: "MS Glow Profile Series Maraton",
+    slug: "ms-glow-profile-series-maraton",
     category: ["Video", "Photography", "Campaign"],
     year: "2023",
     summary:
