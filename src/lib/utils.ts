@@ -16,7 +16,7 @@ export const siteConfig = {
   linkedin: "https://linkedin.com/in/reandysetiawan",
   instagram: "https://instagram.com/reandy.setiawan",
   github: "https://github.com/Reandy99/reandy-setiawan-portfolio",
-  baseUrl: "https://reandy-setiawan.vercel.app",
+  baseUrl: "https://reandysetiawan.my.id",
   cvPath: "/assets/resume/reandy-setiawan-cv.pdf",
   profileImage: "/images/reandy-profile.jpg",
   ambientAudioSrc: "/audio/ambient.mp3",
