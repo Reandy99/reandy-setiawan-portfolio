@@ -12,8 +12,9 @@ export const siteConfig = {
   heroMeta: "Remote-friendly · Based in Jakarta, Indonesia",
   location: "Jakarta, Indonesia",
   availability: "Remote & APAC roles",
-  email: "reandysetiawan1@gmail.com",
-  linkedin: "https://linkedin.com/in/reandysetiawan",
+  email: "Reandysetiawan1@gmail.com",
+  linkedin:
+    "https://www.linkedin.com/in/reandy-setiawan?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
   instagram: "https://instagram.com/reandy.setiawan",
   github: "https://github.com/Reandy99/reandy-setiawan-portfolio",
   baseUrl: "https://reandysetiawan.my.id",

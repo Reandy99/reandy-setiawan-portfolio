@@ -67,7 +67,7 @@ export function ContactSection({
                   rel="noreferrer"
                   className="break-all text-[var(--color-foreground)] transition hover:opacity-70"
                 >
-                  linkedin.com/in/reandysetiawan
+                  linkedin.com/in/reandy-setiawan
                 </a>
               </dd>
             </div>
