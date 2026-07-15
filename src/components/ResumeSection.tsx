@@ -13,7 +13,7 @@ export function ResumeSection() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]">
             Experience
           </p>
-          <h2 className="display-title text-2xl text-[var(--color-foreground)] sm:text-3xl">
+          <h2 className="display-title text-2xl text-[var(--color-foreground)] sm:text-[1.9rem]">
             Professional background
           </h2>
         </div>

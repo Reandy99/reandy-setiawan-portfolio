@@ -34,7 +34,7 @@ export function CaseStudyHero({
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]">
             Case Study
           </p>
-          <h1 className="display-title text-balance text-[2.2rem] text-[var(--color-foreground)] sm:text-4xl md:text-5xl">
+          <h1 className="display-title text-balance text-[2.2rem] text-[var(--color-foreground)] sm:text-4xl md:text-[3.25rem]">
             {project.title}
           </h1>
           <div className="flex flex-wrap gap-2">

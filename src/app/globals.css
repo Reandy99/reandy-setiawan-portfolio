@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-dm-sans);
-  --font-display: var(--font-syne);
-  --font-serif: var(--font-syne);
+  --font-sans: var(--font-outfit);
+  --font-display: var(--font-bricolage);
+  --font-serif: var(--font-bricolage);
   --color-background: #f4f6f4;
   --color-surface: #ffffff;
   --color-surface-alt: #e9eeea;
@@ -92,8 +92,16 @@ a {
 
   .display-title {
     font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-    letter-spacing: -0.045em;
-    line-height: 0.95;
+    font-weight: 700;
+    letter-spacing: -0.055em;
+    line-height: 0.92;
+  }
+
+  .headline-title {
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.12;
   }
 
   .text-balance-tight {

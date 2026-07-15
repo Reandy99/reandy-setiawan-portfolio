@@ -84,7 +84,7 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between gap-3">
           <Link
             href="/"
-            className="display-title text-lg tracking-[-0.04em] text-[var(--color-foreground)] sm:text-xl"
+            className="display-title text-lg tracking-[-0.05em] text-[var(--color-foreground)] sm:text-xl"
           >
             {siteConfig.name}
           </Link>

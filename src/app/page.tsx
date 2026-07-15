@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { AnimatedText } from "@/components/AnimatedText";
 import { ContactSection } from "@/components/ContactSection";
 import { Hero } from "@/components/Hero";
 import { Reveal } from "@/components/Reveal";
@@ -21,34 +22,34 @@ export default function HomePage() {
       <Hero />
 
       <section className="section-shell !pt-10 !pb-8 md:!pt-12">
-        <Reveal>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-y border-black/8 py-8 md:grid-cols-4 md:py-10">
-            {stats.map((item) => (
-              <div key={item.label} className="space-y-1">
-                <p className="display-title text-3xl text-[var(--color-foreground)] md:text-4xl">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-y border-black/8 py-8 md:grid-cols-4 md:py-10">
+          {stats.map((item, index) => (
+            <Reveal key={item.label} delay={index * 0.06} y={20} blur>
+              <div className="space-y-1">
+                <p className="display-title text-3xl text-[var(--color-foreground)] md:text-[2.75rem]">
                   {item.value}
                 </p>
                 <p className="text-sm text-[var(--color-muted)]">{item.label}</p>
               </div>
-            ))}
-          </div>
-        </Reveal>
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       <section id="selected-work" className="section-shell !pt-8">
         <div className="space-y-10 md:space-y-12">
-          <Reveal>
-            <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
               <SectionHeader
                 eyebrow="Selected Work"
                 title="A focused set of projects that show craft and systems thinking."
                 description="Quick scan of range across production, campaigns, and AI-assisted workflows."
               />
-              <Link href="/#work" className="button-secondary shrink-0 self-start md:self-auto">
-                View All Work
-              </Link>
+              <Reveal delay={0.15} y={16} className="shrink-0 self-start md:self-auto">
+                <Link href="/#work" className="button-secondary">
+                  View All Work
+                </Link>
+              </Reveal>
             </div>
-          </Reveal>
 
           <div className="space-y-0 divide-y divide-black/8 border-y border-black/8">
             {selectedProjects.map((project, index) => (
@@ -70,7 +71,7 @@ export default function HomePage() {
                     <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]">
                       {String(index + 1).padStart(2, "0")} · {project.category.join(" · ")}
                     </p>
-                    <h3 className="display-title text-2xl text-[var(--color-foreground)] md:text-3xl">
+                    <h3 className="headline-title text-2xl text-[var(--color-foreground)] md:text-[2rem]">
                       <Link
                         href={`/work/${project.slug}`}
                         className="transition hover:opacity-70"
@@ -97,23 +98,25 @@ export default function HomePage() {
 
       <section className="section-shell">
         <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
-          <Reveal>
-            <div className="space-y-6">
-              <SectionHeader
-                eyebrow="About"
-                title="Strategy, craft, and reliable delivery."
-                description={aboutCopy}
-              />
+          <div className="space-y-6">
+            <SectionHeader
+              eyebrow="About"
+              title="Strategy, craft, and reliable delivery."
+              description={aboutCopy}
+            />
+            <Reveal delay={0.15} blur>
               <p className="text-sm leading-7 text-[var(--color-muted)]">
                 {siteConfig.openFor}
               </p>
+            </Reveal>
+            <Reveal delay={0.2}>
               <div className="flex flex-wrap gap-x-3 gap-y-2 pt-1 text-sm text-[var(--color-muted)]">
                 {toolTags.slice(0, 8).map((tool) => (
                   <span key={tool}>{tool}</span>
                 ))}
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
 
           <div className="grid gap-6 sm:grid-cols-2">
             {capabilityCards.map((item, index) => (
@@ -122,7 +125,7 @@ export default function HomePage() {
                   <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]">
                     {String(index + 1).padStart(2, "0")}
                   </p>
-                  <h3 className="text-lg font-semibold tracking-[-0.02em] text-[var(--color-foreground)]">
+                  <h3 className="headline-title text-lg text-[var(--color-foreground)]">
                     {item.title}
                   </h3>
                   <p className="text-sm leading-6 text-[var(--color-muted)]">
@@ -136,16 +139,20 @@ export default function HomePage() {
       </section>
 
       <section className="section-shell !pt-4">
-        <Reveal>
-          <div className="mb-8 space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]">
+        <div className="mb-8 space-y-3">
+          <Reveal y={12}>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-muted)]">
               Other Portfolios
             </p>
-            <h2 className="display-title text-balance text-3xl text-[var(--color-foreground)] md:text-4xl">
-              More work across brands and platforms.
-            </h2>
-          </div>
-        </Reveal>
+          </Reveal>
+          <AnimatedText
+            text="More work across brands and platforms."
+            as="h2"
+            mode="words"
+            animateOnView
+            className="display-title text-balance text-[clamp(1.85rem,4vw,2.75rem)] text-[var(--color-foreground)]"
+          />
+        </div>
         <div className="grid gap-8 md:grid-cols-3">
           {externalPortfolios.map((portfolio, index) => (
             <Reveal key={portfolio.href} delay={index * 0.06}>
@@ -184,31 +191,29 @@ export default function HomePage() {
       </section>
 
       <section id="work" className="section-shell">
-        <Reveal>
-          <div className="mb-8 max-w-2xl">
-            <SectionHeader
-              eyebrow="Work Archive"
-              title="Projects across video, photography, campaigns, and workflows."
-              description="Filter by type and open any project for the full case study."
-            />
-          </div>
-        </Reveal>
+        <div className="mb-8 max-w-2xl">
+          <SectionHeader
+            eyebrow="Work Archive"
+            title="Projects across video, photography, campaigns, and workflows."
+            description="Filter by type and open any project for the full case study."
+          />
+        </div>
         <WorkGrid projects={visibleProjects} />
       </section>
 
       <section id="resume" className="section-shell">
-        <Reveal>
-          <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <SectionHeader
-              eyebrow="Resume"
-              title="Background in a calm, readable layout."
-              description="Experience, skills, and education — ready for a quick review."
-            />
-            <a href={siteConfig.cvPath} download className="button-primary shrink-0 self-start">
+        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <SectionHeader
+            eyebrow="Resume"
+            title="Background in a calm, readable layout."
+            description="Experience, skills, and education — ready for a quick review."
+          />
+          <Reveal delay={0.12} y={14} className="shrink-0 self-start">
+            <a href={siteConfig.cvPath} download className="button-primary">
               Download Full CV
             </a>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
         <Reveal delay={0.08}>
           <ResumeSection />
         </Reveal>
