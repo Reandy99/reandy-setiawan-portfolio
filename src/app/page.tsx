@@ -1,265 +1,222 @@
-import { ContactSection } from "@/components/ContactSection";
-import {
-  EditorialCapabilityList,
-  EditorialProjectStack,
-  EditorialStatStrip,
-} from "@/components/EditorialSections";
-import { ResumeSection } from "@/components/ResumeSection";
-import { SectionHeader } from "@/components/SectionHeader";
-import { aboutCopy, capabilityCards, stats, toolTags } from "@/data/experience";
-import { featuredProjects } from "@/data/projects";
-import { WorkGrid } from "@/components/WorkGrid";
-import { projects } from "@/data/projects";
-import { externalPortfolios, siteConfig } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+
+import { ContactSection } from "@/components/ContactSection";
+import { Hero } from "@/components/Hero";
+import { Reveal } from "@/components/Reveal";
+import { ResumeSection } from "@/components/ResumeSection";
+import { SectionHeader } from "@/components/SectionHeader";
+import { WorkGrid } from "@/components/WorkGrid";
+import { aboutCopy, capabilityCards, stats, toolTags } from "@/data/experience";
+import { featuredProjects, projects } from "@/data/projects";
+import { getProjectThumbnailSrc } from "@/lib/project-media";
+import { externalPortfolios, siteConfig } from "@/lib/utils";
 
 export default function HomePage() {
   const selectedProjects = featuredProjects.slice(0, 4);
   const visibleProjects = projects.filter((project) => !project.hidden);
-  const heroLinks = [
-    { href: "/#selected-work", label: "Curated Work" },
-    { href: "/#work", label: "All Work" },
-    { href: "/#resume", label: "Resume" },
-  ] as const;
 
   return (
     <>
-      <section className="section-shell pt-8 sm:pt-10 md:pt-12">
-        <div className="grid items-center gap-8 md:grid-cols-[1.08fr_0.92fr] md:gap-8 lg:gap-10">
-          <div className="flex max-w-2xl flex-col gap-6 sm:gap-7">
-            <div className="space-y-4 sm:space-y-5">
-              <div className="space-y-2">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)] sm:text-[11px] sm:tracking-[0.28em]">
-                  {siteConfig.name}
+      <Hero />
+
+      <section className="section-shell !pt-10 !pb-8 md:!pt-12">
+        <Reveal>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-y border-black/8 py-8 md:grid-cols-4 md:py-10">
+            {stats.map((item) => (
+              <div key={item.label} className="space-y-1">
+                <p className="display-title text-3xl text-[var(--color-foreground)] md:text-4xl">
+                  {item.value}
                 </p>
-                <p className="text-xs text-[var(--color-muted)] sm:text-sm">
-                  {siteConfig.heroMeta}
-                </p>
+                <p className="text-sm text-[var(--color-muted)]">{item.label}</p>
               </div>
-              <h1 className="text-balance font-serif text-[2rem] leading-[1.06] tracking-[-0.03em] text-[var(--color-foreground)] sm:text-4xl md:text-[2.85rem] lg:text-[3.15rem]">
-                {siteConfig.heroHeadline}
-              </h1>
-              <div className="space-y-3 text-sm leading-6 text-[var(--color-muted)] sm:leading-7 md:text-[15px]">
-                <p>{siteConfig.heroSubhead}</p>
-                <p className="text-[var(--color-foreground)]">{siteConfig.openFor}</p>
-              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      <section id="selected-work" className="section-shell !pt-8">
+        <div className="space-y-10 md:space-y-12">
+          <Reveal>
+            <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+              <SectionHeader
+                eyebrow="Selected Work"
+                title="A focused set of projects that show craft and systems thinking."
+                description="Quick scan of range across production, campaigns, and AI-assisted workflows."
+              />
+              <Link href="/#work" className="button-secondary shrink-0 self-start md:self-auto">
+                View All Work
+              </Link>
             </div>
+          </Reveal>
 
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
-                <Link href="/#selected-work" className="button-primary">
-                  View Selected Work
-                </Link>
-                <a href={siteConfig.cvPath} download className="button-secondary">
-                  Download CV
-                </a>
-              </div>
-
-              <nav
-                aria-label="Quick links"
-                className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[var(--color-muted)] sm:text-[13px]"
-              >
-                <span className="font-medium uppercase tracking-[0.16em]">
-                  Explore
-                </span>
-                {heroLinks.map((item, index) => (
-                  <span key={item.href} className="inline-flex items-center gap-2">
-                    {index > 0 ? <span aria-hidden="true">·</span> : null}
+          <div className="space-y-0 divide-y divide-black/8 border-y border-black/8">
+            {selectedProjects.map((project, index) => (
+              <Reveal key={project.slug} delay={index * 0.05}>
+                <article className="group grid gap-5 py-7 md:grid-cols-[0.9fr_1.1fr] md:items-center md:gap-10 md:py-9">
+                  <Link
+                    href={`/work/${project.slug}`}
+                    className="relative block aspect-[16/10] overflow-hidden rounded-2xl bg-[var(--color-surface-alt)]"
+                  >
+                    <Image
+                      src={getProjectThumbnailSrc(project)}
+                      alt={`${project.title} preview`}
+                      fill
+                      className="object-cover transition duration-700 group-hover:scale-[1.03]"
+                      sizes="(min-width: 768px) 40vw, 100vw"
+                    />
+                  </Link>
+                  <div className="space-y-3">
+                    <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                      {String(index + 1).padStart(2, "0")} · {project.category.join(" · ")}
+                    </p>
+                    <h3 className="display-title text-2xl text-[var(--color-foreground)] md:text-3xl">
+                      <Link
+                        href={`/work/${project.slug}`}
+                        className="transition hover:opacity-70"
+                      >
+                        {project.title}
+                      </Link>
+                    </h3>
+                    <p className="max-w-xl text-sm leading-7 text-[var(--color-muted)] md:text-[15px]">
+                      {project.summary}
+                    </p>
                     <Link
-                      href={item.href}
-                      className="font-medium text-[var(--color-foreground)] underline decoration-black/10 underline-offset-4 transition hover:decoration-black/30"
+                      href={`/work/${project.slug}`}
+                      className="inline-flex text-sm font-medium text-[var(--color-foreground)] underline decoration-black/15 underline-offset-4 transition hover:decoration-black/40"
                     >
-                      {item.label}
+                      Open case study
                     </Link>
-                  </span>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+          <Reveal>
+            <div className="space-y-6">
+              <SectionHeader
+                eyebrow="About"
+                title="Strategy, craft, and reliable delivery."
+                description={aboutCopy}
+              />
+              <p className="text-sm leading-7 text-[var(--color-muted)]">
+                {siteConfig.openFor}
+              </p>
+              <div className="flex flex-wrap gap-x-3 gap-y-2 pt-1 text-sm text-[var(--color-muted)]">
+                {toolTags.slice(0, 8).map((tool) => (
+                  <span key={tool}>{tool}</span>
                 ))}
-              </nav>
-            </div>
-          </div>
-
-          <div className="md:sticky md:top-24">
-            <div
-              className="overflow-hidden rounded-[22px] border bg-white"
-              style={{ borderColor: "var(--color-border)" }}
-            >
-              <div className="relative aspect-[5/6] overflow-hidden bg-[#ecebe7] sm:aspect-[4/5]">
-                <Image
-                  src={siteConfig.profileImage}
-                  alt="Portrait of Reandy Setiawan"
-                  fill
-                  className="object-cover object-[center_12%]"
-                  sizes="(min-width: 768px) 32vw, 88vw"
-                  priority
-                />
-              </div>
-              <div
-                className="grid grid-cols-2 divide-x border-t text-sm"
-                style={{ borderColor: "var(--color-border)" }}
-              >
-                <div className="space-y-1 px-4 py-3">
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                    Based In
-                  </p>
-                  <p className="font-medium text-[var(--color-foreground)]">
-                    {siteConfig.location}
-                  </p>
-                </div>
-                <div className="space-y-1 px-4 py-3">
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                    Availability
-                  </p>
-                  <p className="font-medium text-[var(--color-foreground)]">
-                    {siteConfig.availability}
-                  </p>
-                </div>
               </div>
             </div>
+          </Reveal>
+
+          <div className="grid gap-6 sm:grid-cols-2">
+            {capabilityCards.map((item, index) => (
+              <Reveal key={item.title} delay={index * 0.06}>
+                <article className="space-y-3 border-t border-black/10 pt-5">
+                  <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="text-lg font-semibold tracking-[-0.02em] text-[var(--color-foreground)]">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm leading-6 text-[var(--color-muted)]">
+                    {item.description}
+                  </p>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </div>
+      </section>
 
-        <div className="mt-8 md:mt-10">
-          <EditorialStatStrip items={stats} compact />
-        </div>
-
-        <div className="mt-5 space-y-3 md:mt-6 md:space-y-4">
-          <div className="space-y-2">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
+      <section className="section-shell !pt-4">
+        <Reveal>
+          <div className="mb-8 space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]">
               Other Portfolios
             </p>
-            <h2 className="text-balance font-serif text-[1.55rem] text-[var(--color-foreground)] sm:text-[1.85rem] md:text-[2.2rem]">
-              More of my work across corporate and photography websites.
+            <h2 className="display-title text-balance text-3xl text-[var(--color-foreground)] md:text-4xl">
+              More work across brands and platforms.
             </h2>
           </div>
-          <div className="grid gap-4 lg:grid-cols-2">
-            {externalPortfolios.map((portfolio) => (
+        </Reveal>
+        <div className="grid gap-8 md:grid-cols-3">
+          {externalPortfolios.map((portfolio, index) => (
+            <Reveal key={portfolio.href} delay={index * 0.06}>
               <a
-                key={portfolio.href}
                 href={portfolio.href}
                 target="_blank"
                 rel="noreferrer"
-                className="group overflow-hidden rounded-[22px] border bg-white transition hover:border-black/12"
-                style={{ borderColor: "var(--color-border)" }}
+                className="group block space-y-4"
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-[#ecebe7]">
+                <div className="relative aspect-[16/11] overflow-hidden rounded-2xl bg-[var(--color-surface-alt)]">
                   <Image
                     src={portfolio.image}
                     alt={`${portfolio.title} website cover`}
                     fill
-                    className="object-cover object-top transition duration-500 group-hover:scale-[1.02]"
-                    sizes="(min-width: 1024px) 45vw, 100vw"
+                    className="object-cover object-top transition duration-700 group-hover:scale-[1.03]"
+                    sizes="(min-width: 768px) 30vw, 100vw"
                   />
                 </div>
-                <div className="space-y-3 p-4 md:p-5">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="space-y-1.5">
-                      <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                        External Portfolio
-                      </p>
-                      <h3 className="text-lg font-semibold text-[var(--color-foreground)] md:text-xl">
-                        {portfolio.title}
-                      </h3>
-                    </div>
-                    <span className="text-sm text-[var(--color-muted)] transition group-hover:text-[var(--color-foreground)]">
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between gap-3">
+                    <h3 className="text-lg font-semibold tracking-[-0.02em] text-[var(--color-foreground)]">
+                      {portfolio.title}
+                    </h3>
+                    <span className="text-[var(--color-muted)] transition group-hover:text-[var(--color-foreground)]">
                       ↗
                     </span>
                   </div>
                   <p className="text-sm leading-6 text-[var(--color-muted)]">
                     {portfolio.description}
                   </p>
-                  <p className="text-xs text-[var(--color-muted)]">{portfolio.href}</p>
                 </div>
               </a>
-            ))}
-          </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      <section id="selected-work" className="section-shell space-y-8">
-        <div className="grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
-          <div className="space-y-5">
+      <section id="work" className="section-shell">
+        <Reveal>
+          <div className="mb-8 max-w-2xl">
             <SectionHeader
-              eyebrow="Selected Work"
-              title="A tighter portfolio selection for quick review."
-              description="This section stays curated and compact so the first scan already shows range, clarity, and visual consistency."
+              eyebrow="Work Archive"
+              title="Projects across video, photography, campaigns, and workflows."
+              description="Filter by type and open any project for the full case study."
             />
-            <Link href="/#work" className="button-secondary">
-              View All Work
-            </Link>
           </div>
-          <EditorialProjectStack projects={selectedProjects} />
-        </div>
+        </Reveal>
+        <WorkGrid projects={visibleProjects} />
       </section>
 
-      <section className="section-shell">
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <article
-            className="rounded-[22px] border bg-white p-5 sm:p-6 md:p-7"
-            style={{ borderColor: "var(--color-border)" }}
-          >
-            <div className="space-y-4">
-              <SectionHeader
-                eyebrow="About"
-                title="A recruiter-friendly read on strategy, craft, and reliability."
-                description={aboutCopy}
-              />
-              <div className="flex flex-wrap gap-2 pt-3">
-                {toolTags.map((tool) => (
-                  <span
-                    key={tool}
-                    className="rounded-full border border-black/8 bg-[#f6f5f2] px-3 py-2 text-sm text-[var(--color-foreground)]"
-                  >
-                    {tool}
-                  </span>
-                ))}
-              </div>
-              <p className="border-t border-black/6 pt-4 text-sm leading-7 text-[var(--color-muted)]">
-                I work best with teams that need visual quality, calm execution,
-                and content systems that can scale without becoming noisy.
-              </p>
-            </div>
-          </article>
-          <EditorialCapabilityList items={capabilityCards} />
-        </div>
-      </section>
-
-      <section id="work" className="section-shell space-y-6">
-        <div className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
-          <SectionHeader
-            eyebrow="Work"
-            title="A structured archive across video, photography, campaign, and workflow projects."
-            description="The archive stays filterable and easy to scan, with a denser panel treatment that is closer to the reference UI language."
-          />
-          <p className="hidden max-w-xl text-sm leading-7 text-[var(--color-muted)] lg:block lg:justify-self-end lg:text-right">
-            The layout is still long-scroll, but the cards, spacing, and panel framing
-            are tighter so the browsing behavior feels closer to the provided desktop reference.
-          </p>
-        </div>
-        <div
-          className="rounded-[22px] border bg-[var(--color-surface-alt)] p-4 md:p-5"
-          style={{ borderColor: "var(--color-border)" }}
-        >
-          <WorkGrid projects={visibleProjects} />
-        </div>
-      </section>
-
-      <section id="resume" className="section-shell space-y-8">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <SectionHeader
-            eyebrow="Resume"
-            title="Background shown with the same calm tone."
-            description="This section keeps the resume clear and compact so it feels integrated, not bolted on."
-          />
-          <a href={siteConfig.cvPath} download className="button-primary">
-            Download Full CV
-          </a>
-        </div>
-        <ResumeSection />
+      <section id="resume" className="section-shell">
+        <Reveal>
+          <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <SectionHeader
+              eyebrow="Resume"
+              title="Background in a calm, readable layout."
+              description="Experience, skills, and education — ready for a quick review."
+            />
+            <a href={siteConfig.cvPath} download className="button-primary shrink-0 self-start">
+              Download Full CV
+            </a>
+          </div>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <ResumeSection />
+        </Reveal>
       </section>
 
       <ContactSection
         title="Contact"
-        subtitle="A simple close for teams who value craft, calm, and clear execution."
+        subtitle="Open for creative marketing, content operations, and visual production roles."
       />
     </>
   );

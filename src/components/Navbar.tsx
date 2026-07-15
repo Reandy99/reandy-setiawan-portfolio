@@ -35,6 +35,7 @@ function MenuIcon({ open }: { open: boolean }) {
 export function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -46,6 +47,18 @@ export function Navbar() {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   const isActive = (href: string) => {
     if (href === "/" || href.startsWith("/#")) {
@@ -59,22 +72,25 @@ export function Navbar() {
     <motion.header
       initial={{ y: -12, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.45 }}
-      className="sticky top-0 z-50 border-b border-black/6 bg-[rgba(245,244,240,0.94)] backdrop-blur-xl"
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition duration-300",
+        scrolled || menuOpen
+          ? "border-b border-black/6 bg-[rgba(244,246,244,0.9)] backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent",
+      )}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-5 md:px-8">
-        <div className="flex h-14 items-center justify-between gap-3 md:h-[3.75rem]">
-          <Link href="/" className="flex min-w-0 items-center gap-2.5 sm:gap-3">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-black/10 bg-white text-[11px] font-semibold text-[var(--color-foreground)]">
-              RS
-            </span>
-            <span className="truncate text-sm font-medium tracking-[0.01em] text-[var(--color-foreground)]">
-              {siteConfig.name}
-            </span>
+      <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-8">
+        <div className="flex h-16 items-center justify-between gap-3">
+          <Link
+            href="/"
+            className="display-title text-lg tracking-[-0.04em] text-[var(--color-foreground)] sm:text-xl"
+          >
+            {siteConfig.name}
           </Link>
 
           <nav
-            className="hidden items-center gap-5 text-[11px] text-[var(--color-muted)] md:flex"
+            className="hidden items-center gap-7 text-sm text-[var(--color-muted)] md:flex"
             aria-label="Primary"
           >
             {navigation.map((item) => (
@@ -82,9 +98,8 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "border-b border-transparent pb-1 transition-colors hover:text-[var(--color-foreground)]",
-                  isActive(item.href) &&
-                    "border-[var(--color-foreground)] text-[var(--color-foreground)]",
+                  "transition-colors hover:text-[var(--color-foreground)]",
+                  isActive(item.href) && "text-[var(--color-foreground)]",
                 )}
               >
                 {item.label}
@@ -95,14 +110,14 @@ export function Navbar() {
           <div className="flex shrink-0 items-center gap-2 md:gap-3">
             <Link
               href="/#contact"
-              className="button-primary hidden whitespace-nowrap sm:inline-flex"
+              className="button-primary hidden whitespace-nowrap sm:inline-flex !min-h-10 !px-4 !text-xs"
             >
               Let&apos;s Connect
             </Link>
 
             <button
               type="button"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-black/10 bg-white text-[var(--color-foreground)] transition hover:border-black/16 md:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white/70 text-[var(--color-foreground)] backdrop-blur-md transition hover:border-black/16 md:hidden"
               aria-expanded={menuOpen}
               aria-controls="mobile-navigation"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -125,7 +140,7 @@ export function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 top-14 z-40 bg-black/20 md:hidden"
+              className="fixed inset-0 top-16 z-40 bg-black/15 md:hidden"
               aria-label="Close menu"
               onClick={() => {
                 setMenuOpen(false);
@@ -137,9 +152,9 @@ export function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.22 }}
-              className="absolute left-0 right-0 top-full z-50 border-b border-black/8 bg-[rgba(245,244,240,0.98)] shadow-[0_18px_40px_rgba(0,0,0,0.08)] backdrop-blur-xl md:hidden"
+              className="absolute left-0 right-0 top-full z-50 border-b border-black/8 bg-[rgba(244,246,244,0.98)] shadow-[0_18px_40px_rgba(0,0,0,0.06)] backdrop-blur-xl md:hidden"
             >
-              <nav className="mx-auto max-w-7xl px-4 py-4 sm:px-5" aria-label="Mobile">
+              <nav className="mx-auto max-w-6xl px-5 py-5 sm:px-6" aria-label="Mobile">
                 <div className="flex flex-col gap-1">
                   {navigation.map((item) => (
                     <Link

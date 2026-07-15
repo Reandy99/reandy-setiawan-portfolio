@@ -1,16 +1,19 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-manrope);
-  --font-serif: var(--font-plus-jakarta-sans);
-  --color-background: #f5f4f0;
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-syne);
+  --font-serif: var(--font-syne);
+  --color-background: #f4f6f4;
   --color-surface: #ffffff;
-  --color-surface-alt: #efede8;
-  --color-border: #dfddd8;
-  --color-foreground: #242320;
-  --color-muted: #7a766f;
-  --color-button-primary: #171717;
-  --color-button-primary-hover: #2a2a2a;
+  --color-surface-alt: #e9eeea;
+  --color-border: #dce3de;
+  --color-foreground: #141816;
+  --color-muted: #66706a;
+  --color-accent: #3d5a4c;
+  --color-accent-soft: #d7e4db;
+  --color-button-primary: #141816;
+  --color-button-primary-hover: #2a312d;
 }
 
 :root {
@@ -38,52 +41,63 @@ a {
 }
 
 ::selection {
-  background: #d9d6ce;
-  color: #171717;
+  background: var(--color-accent-soft);
+  color: var(--color-foreground);
 }
 
 .page-shell {
   min-height: 100vh;
+  background-color: var(--color-background);
   background-image:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.72), transparent 36%),
-    radial-gradient(circle at top right, rgba(235, 232, 224, 0.42), transparent 26%);
+    radial-gradient(ellipse 70% 50% at 8% -10%, rgba(61, 90, 76, 0.08), transparent 55%),
+    radial-gradient(ellipse 55% 40% at 100% 0%, rgba(215, 228, 219, 0.55), transparent 50%),
+    linear-gradient(180deg, #f7f9f7 0%, #f4f6f4 40%, #eef2ef 100%);
 }
 
 @layer components {
   .section-shell {
-    @apply mx-auto max-w-7xl px-4 py-10 sm:px-5 sm:py-12 md:px-8 md:py-14;
+    @apply mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24;
   }
 
   .surface-card {
-    @apply rounded-[18px] border p-4 sm:rounded-[22px] sm:p-5 md:p-6;
+    @apply rounded-2xl border p-5 sm:p-6;
     border-color: var(--color-border);
     background: var(--color-surface);
-    box-shadow: 0 1px 4px rgba(10, 10, 10, 0.02);
   }
 
   .button-primary {
-    @apply inline-flex min-h-10 items-center justify-center rounded-md border px-4 py-2.5 text-xs font-semibold transition;
-    border-color: rgba(0, 0, 0, 0.05);
+    @apply inline-flex min-h-11 items-center justify-center rounded-xl px-5 py-2.5 text-sm font-medium tracking-[-0.01em] transition duration-300;
     background: var(--color-button-primary);
     color: white;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   }
 
   .button-primary:hover {
     background: var(--color-button-primary-hover);
+    transform: translateY(-1px);
   }
 
   .button-secondary {
-    @apply inline-flex min-h-10 items-center justify-center rounded-md border px-4 py-2.5 text-xs font-semibold transition;
-    border-color: var(--color-border);
-    background: white;
+    @apply inline-flex min-h-11 items-center justify-center rounded-xl border px-5 py-2.5 text-sm font-medium tracking-[-0.01em] transition duration-300;
+    border-color: rgba(20, 24, 22, 0.14);
+    background: rgba(255, 255, 255, 0.72);
     color: var(--color-foreground);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    backdrop-filter: blur(8px);
   }
 
   .button-secondary:hover {
-    border-color: rgba(0, 0, 0, 0.12);
-    background: #fafafa;
+    border-color: rgba(20, 24, 22, 0.28);
+    background: white;
+    transform: translateY(-1px);
+  }
+
+  .display-title {
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+  }
+
+  .text-balance-tight {
+    text-wrap: balance;
   }
 
   .ambient-audio-control {
@@ -92,10 +106,10 @@ a {
 
   .ambient-audio-button {
     @apply inline-flex items-center gap-2.5 rounded-full border px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.24em] transition sm:gap-3 sm:px-4 sm:py-2.5 sm:text-[10px] sm:tracking-[0.28em];
-    border-color: rgba(0, 0, 0, 0.08);
+    border-color: rgba(20, 24, 22, 0.1);
     background: rgba(255, 255, 255, 0.88);
     color: var(--color-foreground);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px rgba(20, 24, 22, 0.06);
     backdrop-filter: blur(12px);
   }
 
@@ -104,7 +118,7 @@ a {
   }
 
   .ambient-audio-button--active {
-    background: rgba(23, 23, 23, 0.94);
+    background: rgba(20, 24, 22, 0.94);
     color: white;
     border-color: rgba(255, 255, 255, 0.08);
   }
@@ -157,5 +171,16 @@ a {
 
   50% {
     transform: scaleY(1.15);
+  }
+}
+
+@keyframes soft-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
   }
 }

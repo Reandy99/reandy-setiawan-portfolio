@@ -19,22 +19,24 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.35, delay: index * 0.05 }}
+      transition={{ duration: 0.45, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
       className="group"
     >
       <Link
         href={href}
         target={isExternal ? "_blank" : undefined}
         rel={isExternal ? "noreferrer" : undefined}
-        className="surface-card block overflow-hidden p-0 transition hover:border-black/12"
+        className="block space-y-4"
       >
         <div
           className={cn(
-            "relative aspect-[4/3] overflow-hidden rounded-[18px] rounded-b-none",
-            project.thumbnailFit === "contain" ? "bg-[#eef1f5]" : "bg-[#ecebe7]",
+            "relative aspect-[4/3] overflow-hidden rounded-2xl",
+            project.thumbnailFit === "contain"
+              ? "bg-[#eef1f5]"
+              : "bg-[var(--color-surface-alt)]",
           )}
         >
           <Image
@@ -42,21 +44,23 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             alt={`${project.title} project thumbnail`}
             fill
             className={cn(
-              "transition duration-500 group-hover:scale-[1.02]",
-              project.thumbnailFit === "contain" ? "object-contain p-1" : "object-cover",
+              "transition duration-700 group-hover:scale-[1.03]",
+              project.thumbnailFit === "contain"
+                ? "object-contain p-1"
+                : "object-cover",
             )}
             sizes="(min-width: 1280px) 24vw, (min-width: 768px) 33vw, 100vw"
           />
         </div>
-        <div className="flex items-start justify-between gap-3 p-4">
+        <div className="flex items-start justify-between gap-3">
           <div className="space-y-1.5">
-            <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
+            <p className="text-[11px] uppercase tracking-[0.16em] text-[var(--color-muted)]">
               {project.category.join(" · ")}
             </p>
-            <h3 className="text-sm font-semibold leading-5 text-[var(--color-foreground)] md:text-base">
+            <h3 className="text-base font-semibold tracking-[-0.02em] text-[var(--color-foreground)]">
               {project.title}
             </h3>
-            <p className="text-[11px] leading-5 text-[var(--color-muted)]">
+            <p className="text-sm leading-6 text-[var(--color-muted)]">
               {project.summary}
             </p>
           </div>

@@ -20,15 +20,15 @@ export function SectionHeader({
       }
     >
       {eyebrow ? (
-        <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]">
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="text-balance font-serif text-[1.55rem] leading-tight text-[var(--color-foreground)] sm:text-[1.85rem] md:text-[2.2rem]">
+      <h2 className="display-title text-balance text-[1.85rem] text-[var(--color-foreground)] sm:text-[2.15rem] md:text-[2.5rem]">
         {title}
       </h2>
       {description ? (
-        <p className="text-sm leading-7 text-[var(--color-muted)]">
+        <p className="max-w-2xl text-[15px] leading-7 text-[var(--color-muted)]">
           {description}
         </p>
       ) : null}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
+import { DM_Sans, Syne } from "next/font/google";
 
 import { AmbientAudioControl } from "@/components/AmbientAudioControl";
 import { Footer } from "@/components/Footer";
@@ -8,15 +8,15 @@ import { siteConfig } from "@/lib/utils";
 
 import "./globals.css";
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta-sans",
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -72,7 +72,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body className={`${manrope.variable} ${plusJakartaSans.variable} font-sans antialiased`}>
+      <body className={`${dmSans.variable} ${syne.variable} font-sans antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
