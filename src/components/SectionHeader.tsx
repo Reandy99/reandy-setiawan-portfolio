@@ -1,3 +1,8 @@
+"use client";
+
+import { AnimatedText } from "@/components/AnimatedText";
+import { Reveal } from "@/components/Reveal";
+
 type SectionHeaderProps = {
   eyebrow?: string;
   title: string;
@@ -15,22 +20,31 @@ export function SectionHeader({
     <div
       className={
         align === "center"
-          ? "mx-auto max-w-3xl space-y-3 text-center"
-          : "max-w-3xl space-y-3"
+          ? "mx-auto max-w-3xl space-y-4 text-center"
+          : "max-w-3xl space-y-4"
       }
     >
       {eyebrow ? (
-        <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
-          {eyebrow}
-        </p>
+        <Reveal y={12} delay={0}>
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)]">
+            {eyebrow}
+          </p>
+        </Reveal>
       ) : null}
-      <h2 className="text-balance font-serif text-[1.55rem] leading-tight text-[var(--color-foreground)] sm:text-[1.85rem] md:text-[2.2rem]">
-        {title}
-      </h2>
+      <AnimatedText
+        text={title}
+        as="h2"
+        mode="words"
+        animateOnView
+        delay={0.05}
+        className="display-title text-[clamp(1.8rem,4vw,2.8rem)] text-[var(--color-accent)]"
+      />
       {description ? (
-        <p className="text-sm leading-7 text-[var(--color-muted)]">
-          {description}
-        </p>
+        <Reveal y={16} delay={0.12}>
+          <p className="max-w-2xl text-[15px] leading-7 text-[var(--color-muted)] sm:text-base sm:leading-8">
+            {description}
+          </p>
+        </Reveal>
       ) : null}
     </div>
   );

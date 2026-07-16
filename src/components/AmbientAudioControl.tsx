@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 import {
@@ -18,12 +19,17 @@ const INTERACTION_EVENTS = [
 ] as const;
 
 export function AmbientAudioControl() {
+  const pathname = usePathname();
   const engineRef = useRef<AmbientAudioEngine | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const hideOnScrollWorld = pathname.startsWith("/scroll-world");
 
   useEffect(() => {
+    if (hideOnScrollWorld) {
+      return;
+    }
     engineRef.current = new AmbientAudioEngine();
 
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -82,7 +88,7 @@ export function AmbientAudioControl() {
       engineRef.current?.dispose();
       engineRef.current = null;
     };
-  }, []);
+  }, [hideOnScrollWorld]);
 
   const handleToggle = async () => {
     const engine = engineRef.current;
@@ -100,7 +106,7 @@ export function AmbientAudioControl() {
     setIsPlaying(didPlay);
   };
 
-  if (!isReady) {
+  if (hideOnScrollWorld || !isReady) {
     return null;
   }
 

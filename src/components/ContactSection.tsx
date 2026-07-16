@@ -1,141 +1,67 @@
 "use client";
 
-import { motion } from "framer-motion";
-
+import { AnimatedText } from "@/components/AnimatedText";
+import { Reveal } from "@/components/Reveal";
 import { siteConfig } from "@/lib/utils";
 
-type ContactSectionProps = {
-  title?: string;
-  subtitle?: string;
-};
-
-export function ContactSection({
-  title = "Contact",
-  subtitle = "Let's create something impactful together.",
-}: ContactSectionProps) {
+export function ContactSection() {
   return (
-    <motion.section
-      id="contact"
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.4 }}
-      className="section-shell"
-    >
-      <div className="mb-6 max-w-3xl space-y-2">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
-          {title}
-        </p>
-        <h2 className="text-balance font-serif text-[1.55rem] text-[var(--color-foreground)] sm:text-[1.85rem] md:text-[2.2rem]">
-          {subtitle}
-        </h2>
+    <section id="contact" className="nv-section !pb-8">
+      <div className="nv-container space-y-12">
+        <Reveal>
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="flex flex-wrap items-center gap-3">
+              <a href={`mailto:${siteConfig.email}`} className="pill-solid !px-6 !py-3 !text-sm">
+                {siteConfig.email}
+              </a>
+              <span className="pill">Socials</span>
+              <a
+                href={siteConfig.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/25 text-xs font-semibold text-[var(--color-foreground)] transition hover:bg-[var(--color-foreground)] hover:text-[var(--color-background)]"
+              >
+                in
+              </a>
+              <a
+                href={siteConfig.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/25 text-xs font-semibold text-[var(--color-foreground)] transition hover:bg-[var(--color-foreground)] hover:text-[var(--color-background)]"
+              >
+                ig
+              </a>
+            </div>
+            <p className="max-w-sm text-sm leading-7 text-[var(--color-muted)]">
+              For hiring inquiries, collaborations, or portfolio reviews —
+              reach out directly.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="h-px w-full bg-black/15" />
+
+        <div>
+          <h2 className="sr-only">Contact {siteConfig.name}</h2>
+          <div className="flex flex-col gap-0 md:flex-row md:items-end md:justify-between">
+            <AnimatedText
+              text="reAndy"
+              as="p"
+              mode="chars"
+              animateOnView
+              className="display-mega text-[clamp(4.5rem,16vw,12rem)] text-[var(--color-foreground)]"
+            />
+            <AnimatedText
+              text="sEtiawan"
+              as="p"
+              mode="chars"
+              animateOnView
+              delay={0.12}
+              className="display-mega text-[clamp(4.5rem,16vw,12rem)] text-[var(--color-foreground)] md:text-right"
+            />
+          </div>
+        </div>
       </div>
-
-      <div className="grid gap-4 lg:grid-cols-[0.92fr_1.08fr]">
-        <article className="surface-card space-y-4">
-          <div className="space-y-2">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
-              Get in Touch
-            </p>
-            <h3 className="text-xl font-semibold text-[var(--color-foreground)]">
-              Contact details
-            </h3>
-          </div>
-
-          <dl className="space-y-3 text-sm">
-            <div>
-              <dt className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
-                Email
-              </dt>
-              <dd className="mt-1">
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="break-all text-[var(--color-foreground)] transition hover:opacity-70"
-                >
-                  {siteConfig.email}
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
-                LinkedIn
-              </dt>
-              <dd className="mt-1">
-                <a
-                  href={siteConfig.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="break-all text-[var(--color-foreground)] transition hover:opacity-70"
-                >
-                  linkedin.com/in/reandy-setiawan
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
-                Instagram
-              </dt>
-              <dd className="mt-1">
-                <a
-                  href={siteConfig.instagram}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="break-all text-[var(--color-foreground)] transition hover:opacity-70"
-                >
-                  @reandy.setiawan
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
-                Location
-              </dt>
-              <dd className="mt-1 text-[var(--color-foreground)]">
-                {siteConfig.location}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
-                Availability
-              </dt>
-              <dd className="mt-1 text-[var(--color-foreground)]">
-                {siteConfig.availability}
-              </dd>
-            </div>
-          </dl>
-        </article>
-
-        <article className="surface-card flex flex-col justify-between gap-6">
-          <div className="space-y-3">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
-              Quick Actions
-            </p>
-            <h3 className="text-xl font-semibold text-[var(--color-foreground)]">
-              Reach out directly
-            </h3>
-            <p className="text-sm leading-6 text-[var(--color-muted)]">
-              For hiring inquiries, collaborations, or portfolio reviews — email
-              me directly or connect on LinkedIn.
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a href={`mailto:${siteConfig.email}`} className="button-primary">
-              Email Me
-            </a>
-            <a
-              href={siteConfig.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="button-secondary"
-            >
-              LinkedIn
-            </a>
-            <a href={siteConfig.cvPath} download className="button-secondary">
-              Download CV
-            </a>
-          </div>
-        </article>
-      </div>
-    </motion.section>
+    </section>
   );
 }

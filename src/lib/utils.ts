@@ -20,6 +20,7 @@ export const siteConfig = {
   baseUrl: "https://reandysetiawan.my.id",
   cvPath: "/assets/resume/reandy-setiawan-cv.pdf",
   profileImage: "/images/reandy-profile.jpg",
+  heroBackgroundImage: "/images/hero/production-atmosphere-v2.jpg",
   ambientAudioSrc: "/audio/ambient.mp3",
   ambientAudioTitle: "Calm Ambient Dreamscape",
   ambientAudioArtist: "morgan-ambient",
@@ -52,8 +53,9 @@ export const externalPortfolios = [
 ] as const;
 
 export const navigation = [
-  { href: "/", label: "Home" },
-  { href: "/#work", label: "Work" },
+  { href: "/#about", label: "About me" },
+  { href: "/#work", label: "Track record" },
+  { href: "/#expertises", label: "Expertises" },
   { href: "/#resume", label: "Resume" },
   { href: "/#contact", label: "Contact" },
 ] as const;

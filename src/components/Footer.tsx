@@ -1,35 +1,47 @@
-import Link from "next/link";
+"use client";
+
+import { usePathname } from "next/navigation";
 
 import { siteConfig } from "@/lib/utils";
 
 export function Footer() {
-  return (
-    <footer className="border-t border-black/6">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 sm:px-5 md:flex-row md:items-center md:justify-between md:px-8">
-        <div className="flex items-center gap-3">
-          <span className="flex h-8 w-8 items-center justify-center rounded-md border border-black/10 bg-white text-[11px] font-semibold text-[var(--color-foreground)]">
-            RS
-          </span>
-          <p className="text-xs text-[var(--color-muted)]">
-            © 2026 Reandy Setiawan. All rights reserved.
-          </p>
-        </div>
+  const pathname = usePathname();
 
-        <div className="flex flex-wrap items-center gap-4">
+  if (pathname.startsWith("/scroll-world")) {
+    return null;
+  }
+
+  return (
+    <footer>
+      <div className="nv-container flex flex-col gap-3 border-t border-black/15 py-5 md:flex-row md:items-center md:justify-between">
+        <p className="text-xs text-[var(--color-muted)]">
+          2026 © {siteConfig.name}
+        </p>
+        <div className="flex flex-wrap gap-4 text-xs text-[var(--color-muted)]">
+          <a
+            href={siteConfig.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-4 transition hover:text-[var(--color-foreground)]"
+          >
+            LinkedIn
+          </a>
+          <a
+            href={siteConfig.instagram}
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-4 transition hover:text-[var(--color-foreground)]"
+          >
+            Instagram
+          </a>
           <a
             href={siteConfig.github}
             target="_blank"
             rel="noreferrer"
-            className="text-xs text-[var(--color-muted)] transition hover:text-[var(--color-foreground)]"
+            className="underline underline-offset-4 transition hover:text-[var(--color-foreground)]"
           >
             GitHub
           </a>
-          <Link
-            href="/"
-            className="text-xs text-[var(--color-muted)] transition hover:text-[var(--color-foreground)]"
-          >
-            Top ↑
-          </Link>
         </div>
       </div>
     </footer>

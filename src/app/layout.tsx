@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
+import { Bebas_Neue, Manrope } from "next/font/google";
 
 import { AmbientAudioControl } from "@/components/AmbientAudioControl";
 import { Footer } from "@/components/Footer";
@@ -13,10 +13,10 @@ const manrope = Manrope({
   subsets: ["latin"],
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta-sans",
+const bebas = Bebas_Neue({
+  variable: "--font-bebas",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -72,7 +72,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body className={`${manrope.variable} ${plusJakartaSans.variable} font-sans antialiased`}>
+      <body className={`${manrope.variable} ${bebas.variable} font-sans antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
