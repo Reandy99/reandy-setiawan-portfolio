@@ -76,7 +76,7 @@ export function Navbar() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition duration-300",
         scrolled || menuOpen
-          ? "border-b border-black/6 bg-[rgba(244,246,244,0.9)] backdrop-blur-xl"
+          ? "border-b border-black/6 bg-[rgba(238,241,244,0.9)] backdrop-blur-xl"
           : "border-b border-transparent bg-transparent",
       )}
     >
@@ -152,7 +152,7 @@ export function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.22 }}
-              className="absolute left-0 right-0 top-full z-50 border-b border-black/8 bg-[rgba(244,246,244,0.98)] shadow-[0_18px_40px_rgba(0,0,0,0.06)] backdrop-blur-xl md:hidden"
+              className="absolute left-0 right-0 top-full z-50 border-b border-black/8 bg-[rgba(238,241,244,0.98)] shadow-[0_18px_40px_rgba(0,0,0,0.06)] backdrop-blur-xl md:hidden"
             >
               <nav className="mx-auto max-w-6xl px-5 py-5 sm:px-6" aria-label="Mobile">
                 <div className="flex flex-col gap-1">

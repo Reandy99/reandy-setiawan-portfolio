@@ -13,7 +13,7 @@ export function Hero() {
   return (
     <section className="relative min-h-[min(100svh,920px)] overflow-hidden">
       <motion.div
-        initial={{ scale: 1.08, opacity: 0.65 }}
+        initial={{ scale: 1.08, opacity: 0.55 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.55, ease }}
         className="absolute inset-0"
@@ -23,13 +23,18 @@ export function Hero() {
           alt=""
           fill
           priority
-          className="object-cover object-[center_18%]"
+          className="object-cover object-[center_12%] md:object-[72%_14%] scale-[1.02]"
           sizes="100vw"
           aria-hidden
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#f4f6f4] via-[#f4f6f4]/88 to-[#f4f6f4]/25" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#f4f6f4] via-transparent to-[#f4f6f4]/35" />
+        {/* Soft veil for type only — keep portrait strong on the right */}
+        <div className="absolute inset-0 bg-[linear-gradient(105deg,#eef1f4_0%,rgba(238,241,244,0.94)_22%,rgba(238,241,244,0.55)_44%,rgba(238,241,244,0.18)_62%,transparent_78%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,#eef1f4_0%,rgba(238,241,244,0.35)_14%,transparent_34%)]" />
+        <div className="absolute inset-0 mix-blend-soft-light bg-[radial-gradient(ellipse_70%_60%_at_80%_35%,rgba(47,93,111,0.18),transparent_65%)]" />
       </motion.div>
+
+      <div className="pointer-events-none absolute -left-24 top-24 h-64 w-64 rounded-full bg-[rgba(47,93,111,0.12)] blur-3xl md:h-80 md:w-80" />
+      <div className="pointer-events-none absolute bottom-10 right-[-4rem] h-72 w-72 rounded-full bg-[rgba(213,230,236,0.45)] blur-3xl" />
 
       <div className="relative mx-auto flex min-h-[min(100svh,920px)] max-w-6xl flex-col justify-end px-5 pb-16 pt-28 sm:px-6 sm:pb-20 md:justify-center md:px-8 md:pb-24 md:pt-24">
         <div className="max-w-3xl space-y-7 md:space-y-8">

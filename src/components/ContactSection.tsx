@@ -16,7 +16,7 @@ export function ContactSection({
   return (
     <section id="contact" className="section-shell">
       <Reveal blur>
-        <div className="overflow-hidden rounded-[28px] border border-black/8 bg-[linear-gradient(145deg,#ffffff_0%,#eef3ef_100%)] px-6 py-10 sm:px-8 sm:py-12 md:px-12 md:py-14">
+        <div className="overflow-hidden rounded-[28px] border border-black/8 bg-[linear-gradient(145deg,#ffffff_0%,#e8eef3_100%)] px-6 py-10 sm:px-8 sm:py-12 md:px-12 md:py-14">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div className="space-y-4">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-muted)]">
