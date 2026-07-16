@@ -20,6 +20,7 @@ export const siteConfig = {
   baseUrl: "https://reandysetiawan.my.id",
   cvPath: "/assets/resume/reandy-setiawan-cv.pdf",
   profileImage: "/images/reandy-profile.jpg",
+  heroBackgroundImage: "/images/hero/production-atmosphere.jpg",
   ambientAudioSrc: "/audio/ambient.mp3",
   ambientAudioTitle: "Calm Ambient Dreamscape",
   ambientAudioArtist: "morgan-ambient",

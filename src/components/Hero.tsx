@@ -19,22 +19,22 @@ export function Hero() {
         className="absolute inset-0"
       >
         <Image
-          src={siteConfig.profileImage}
+          src={siteConfig.heroBackgroundImage}
           alt=""
           fill
           priority
-          className="object-cover object-[center_12%] md:object-[72%_14%] scale-[1.02]"
+          className="object-cover object-[center_42%]"
           sizes="100vw"
           aria-hidden
         />
-        {/* Soft veil for type only — keep portrait strong on the right */}
-        <div className="absolute inset-0 bg-[linear-gradient(105deg,#eef1f4_0%,rgba(238,241,244,0.94)_22%,rgba(238,241,244,0.55)_44%,rgba(238,241,244,0.18)_62%,transparent_78%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,#eef1f4_0%,rgba(238,241,244,0.35)_14%,transparent_34%)]" />
-        <div className="absolute inset-0 mix-blend-soft-light bg-[radial-gradient(ellipse_70%_60%_at_80%_35%,rgba(47,93,111,0.18),transparent_65%)]" />
+        {/* Soft veil for type readability — keep atmosphere visible */}
+        <div className="absolute inset-0 bg-[linear-gradient(105deg,#eef1f4_0%,rgba(238,241,244,0.9)_26%,rgba(238,241,244,0.42)_50%,rgba(238,241,244,0.12)_68%,transparent_82%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,#eef1f4_0%,rgba(238,241,244,0.4)_16%,transparent_40%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_78%_40%,rgba(18,22,28,0.18),transparent_70%)]" />
       </motion.div>
 
       <div className="pointer-events-none absolute -left-24 top-24 h-64 w-64 rounded-full bg-[rgba(47,93,111,0.12)] blur-3xl md:h-80 md:w-80" />
-      <div className="pointer-events-none absolute bottom-10 right-[-4rem] h-72 w-72 rounded-full bg-[rgba(213,230,236,0.45)] blur-3xl" />
+      <div className="pointer-events-none absolute bottom-10 right-[-4rem] h-72 w-72 rounded-full bg-[rgba(213,230,236,0.35)] blur-3xl" />
 
       <div className="relative mx-auto flex min-h-[min(100svh,920px)] max-w-6xl flex-col justify-end px-5 pb-16 pt-28 sm:px-6 sm:pb-20 md:justify-center md:px-8 md:pb-24 md:pt-24">
         <div className="max-w-3xl space-y-7 md:space-y-8">
