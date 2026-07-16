@@ -53,8 +53,9 @@ export const externalPortfolios = [
 ] as const;
 
 export const navigation = [
-  { href: "/", label: "Home" },
-  { href: "/#work", label: "Work" },
+  { href: "/#about", label: "About me" },
+  { href: "/#work", label: "Track record" },
+  { href: "/#expertises", label: "Expertises" },
   { href: "/#resume", label: "Resume" },
   { href: "/#contact", label: "Contact" },
 ] as const;

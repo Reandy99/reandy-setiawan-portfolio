@@ -26,7 +26,7 @@ export function SectionHeader({
     >
       {eyebrow ? (
         <Reveal y={12} delay={0}>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-muted)]">
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)]">
             {eyebrow}
           </p>
         </Reveal>
@@ -37,7 +37,7 @@ export function SectionHeader({
         mode="words"
         animateOnView
         delay={0.05}
-        className="display-title text-balance text-[clamp(1.85rem,4.2vw,2.85rem)] text-[var(--color-foreground)]"
+        className="display-title text-[clamp(1.8rem,4vw,2.8rem)] text-[var(--color-accent)]"
       />
       {description ? (
         <Reveal y={16} delay={0.12}>

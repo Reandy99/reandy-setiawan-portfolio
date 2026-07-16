@@ -22,7 +22,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.45, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.45, delay: index * 0.04, ease: [0.6, 0, 0.4, 1] }}
       className="group"
     >
       <Link
@@ -33,7 +33,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
       >
         <div
           className={cn(
-            "relative aspect-[4/3] overflow-hidden rounded-2xl",
+            "relative aspect-[4/3] overflow-hidden",
             project.thumbnailFit === "contain"
               ? "bg-[#eef1f5]"
               : "bg-[var(--color-surface-alt)]",
@@ -52,21 +52,19 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             sizes="(min-width: 1280px) 24vw, (min-width: 768px) 33vw, 100vw"
           />
         </div>
-        <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start justify-between gap-3 border-t border-black/15 pt-4">
           <div className="space-y-1.5">
             <p className="text-[11px] uppercase tracking-[0.16em] text-[var(--color-muted)]">
               {project.category.join(" · ")}
             </p>
-            <h3 className="text-base font-semibold tracking-[-0.02em] text-[var(--color-foreground)]">
+            <h3 className="text-base font-semibold text-[var(--color-foreground)]">
               {project.title}
             </h3>
             <p className="text-sm leading-6 text-[var(--color-muted)]">
               {project.summary}
             </p>
           </div>
-          <span className="text-sm text-[var(--color-muted)] transition group-hover:text-[var(--color-foreground)]">
-            ↗
-          </span>
+          <span className="text-sm text-[var(--color-muted)]">↗</span>
         </div>
       </Link>
     </motion.article>

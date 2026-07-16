@@ -5,7 +5,14 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-import { cn, navigation, siteConfig } from "@/lib/utils";
+import { cn } from "@/lib/utils";
+
+const navItems = [
+  { href: "/#about", label: "About me" },
+  { href: "/#work", label: "Track record" },
+  { href: "/#expertises", label: "Expertises" },
+  { href: "/#resume", label: "Resume" },
+] as const;
 
 function MenuIcon({ open }: { open: boolean }) {
   return (
@@ -36,6 +43,7 @@ export function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const isHome = pathname === "/";
 
   useEffect(() => {
     setMenuOpen(false);
@@ -50,7 +58,7 @@ export function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 24);
+      setScrolled(window.scrollY > 40);
     };
 
     onScroll();
@@ -60,134 +68,111 @@ export function Navbar() {
     };
   }, []);
 
-  const isActive = (href: string) => {
-    if (href === "/" || href.startsWith("/#")) {
-      return pathname === "/";
-    }
-
-    return pathname === href || pathname.startsWith(`${href}/`);
-  };
+  const lightHero = isHome && !scrolled && !menuOpen;
 
   return (
     <motion.header
-      initial={{ y: -12, opacity: 0 }}
+      initial={{ y: -16, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition duration-300",
-        scrolled || menuOpen
-          ? "border-b border-black/6 bg-[rgba(238,241,244,0.9)] backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent",
-      )}
+      transition={{ duration: 0.5, ease: [0.6, 0, 0.4, 1] }}
+      className="fixed inset-x-0 top-0 z-50"
     >
-      <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-8">
-        <div className="flex h-16 items-center justify-between gap-3">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-3 px-4 py-4 sm:px-6 md:px-8">
+        <nav
+          className={cn(
+            "hidden items-center gap-2 rounded-full border p-1.5 md:flex",
+            lightHero
+              ? "border-white/25 bg-black/20 backdrop-blur-md"
+              : "border-black/15 bg-[rgba(227,227,223,0.85)] backdrop-blur-md",
+          )}
+          aria-label="Primary"
+        >
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(lightHero ? "pill-light !py-1.5 !text-[11px]" : "pill !py-1.5 !text-[11px]")}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <Link
+          href="/"
+          className={cn(
+            "display-title text-lg tracking-wide md:hidden",
+            lightHero ? "text-white" : "text-[var(--color-foreground)]",
+          )}
+        >
+          RS
+        </Link>
+
+        <div className="flex items-center gap-2">
           <Link
-            href="/"
-            className="display-title text-lg tracking-[-0.05em] text-[var(--color-foreground)] sm:text-xl"
+            href="/#contact"
+            className={cn(
+              "hidden sm:inline-flex",
+              lightHero ? "pill-light" : "pill-solid",
+            )}
           >
-            {siteConfig.name}
+            Contact
           </Link>
 
-          <nav
-            className="hidden items-center gap-7 text-sm text-[var(--color-muted)] md:flex"
-            aria-label="Primary"
+          <button
+            type="button"
+            className={cn(
+              "inline-flex h-10 w-10 items-center justify-center rounded-full border md:hidden",
+              lightHero
+                ? "border-white/35 bg-black/25 text-white"
+                : "border-black/20 bg-[rgba(227,227,223,0.9)] text-[var(--color-foreground)]",
+            )}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={() => {
+              setMenuOpen((open) => !open);
+            }}
           >
-            {navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "transition-colors hover:text-[var(--color-foreground)]",
-                  isActive(item.href) && "text-[var(--color-foreground)]",
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex shrink-0 items-center gap-2 md:gap-3">
-            <Link
-              href="/#contact"
-              className="button-primary hidden whitespace-nowrap sm:inline-flex !min-h-10 !px-4 !text-xs"
-            >
-              Let&apos;s Connect
-            </Link>
-
-            <button
-              type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white/70 text-[var(--color-foreground)] backdrop-blur-md transition hover:border-black/16 md:hidden"
-              aria-expanded={menuOpen}
-              aria-controls="mobile-navigation"
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              onClick={() => {
-                setMenuOpen((open) => !open);
-              }}
-            >
-              <MenuIcon open={menuOpen} />
-            </button>
-          </div>
+            <MenuIcon open={menuOpen} />
+          </button>
         </div>
       </div>
 
       <AnimatePresence>
         {menuOpen ? (
-          <>
-            <motion.button
-              type="button"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 top-16 z-40 bg-black/15 md:hidden"
-              aria-label="Close menu"
-              onClick={() => {
-                setMenuOpen(false);
-              }}
-            />
-            <motion.div
-              id="mobile-navigation"
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.22 }}
-              className="absolute left-0 right-0 top-full z-50 border-b border-black/8 bg-[rgba(238,241,244,0.98)] shadow-[0_18px_40px_rgba(0,0,0,0.06)] backdrop-blur-xl md:hidden"
-            >
-              <nav className="mx-auto max-w-6xl px-5 py-5 sm:px-6" aria-label="Mobile">
-                <div className="flex flex-col gap-1">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={cn(
-                        "rounded-xl px-3 py-3 text-sm font-medium transition",
-                        isActive(item.href)
-                          ? "bg-white text-[var(--color-foreground)]"
-                          : "text-[var(--color-muted)] hover:bg-white/70 hover:text-[var(--color-foreground)]",
-                      )}
-                      onClick={() => {
-                        setMenuOpen(false);
-                      }}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-                <div className="mt-4 border-t border-black/6 pt-4">
-                  <Link
-                    href="/#contact"
-                    className="button-primary w-full"
-                    onClick={() => {
-                      setMenuOpen(false);
-                    }}
-                  >
-                    Let&apos;s Connect
-                  </Link>
-                </div>
-              </nav>
-            </motion.div>
-          </>
+          <motion.div
+            id="mobile-navigation"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.22 }}
+            className="border-b border-black/10 bg-[rgba(227,227,223,0.98)] px-4 py-5 backdrop-blur-xl md:hidden"
+          >
+            <nav className="flex flex-col gap-2" aria-label="Mobile">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="pill w-full"
+                  onClick={() => {
+                    setMenuOpen(false);
+                  }}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Link
+                href="/#contact"
+                className="pill-solid w-full"
+                onClick={() => {
+                  setMenuOpen(false);
+                }}
+              >
+                Contact
+              </Link>
+            </nav>
+          </motion.div>
         ) : null}
       </AnimatePresence>
     </motion.header>

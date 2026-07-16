@@ -14,88 +14,72 @@ export function ContactSection({
   subtitle = "Let's create something impactful together.",
 }: ContactSectionProps) {
   return (
-    <section id="contact" className="section-shell">
-      <Reveal blur>
-        <div className="overflow-hidden rounded-[28px] border border-black/8 bg-[linear-gradient(145deg,#ffffff_0%,#e8eef3_100%)] px-6 py-10 sm:px-8 sm:py-12 md:px-12 md:py-14">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-            <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-muted)]">
-                {title}
-              </p>
-              <AnimatedText
-                text={subtitle}
-                as="h2"
-                mode="words"
-                animateOnView
-                delay={0.08}
-                className="display-title max-w-xl text-balance text-[clamp(1.9rem,4.5vw,3.2rem)] text-[var(--color-foreground)]"
-              />
-              <p className="max-w-md text-[15px] leading-7 text-[var(--color-muted)]">
-                For hiring inquiries, collaborations, or portfolio reviews — email
-                me directly or connect on LinkedIn.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              <dl className="space-y-4 text-sm">
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.16em] text-[var(--color-muted)]">
-                    Email
-                  </dt>
-                  <dd className="mt-1">
-                    <a
-                      href={`mailto:${siteConfig.email}`}
-                      className="break-all text-base font-medium text-[var(--color-foreground)] transition hover:opacity-70"
-                    >
-                      {siteConfig.email}
-                    </a>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.16em] text-[var(--color-muted)]">
-                    LinkedIn
-                  </dt>
-                  <dd className="mt-1">
-                    <a
-                      href={siteConfig.linkedin}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-base font-medium text-[var(--color-foreground)] transition hover:opacity-70"
-                    >
-                      linkedin.com/in/reandy-setiawan
-                    </a>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.16em] text-[var(--color-muted)]">
-                    Based in
-                  </dt>
-                  <dd className="mt-1 text-base font-medium text-[var(--color-foreground)]">
-                    {siteConfig.location}
-                  </dd>
-                </div>
-              </dl>
-
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <a href={`mailto:${siteConfig.email}`} className="button-primary">
-                  Email Me
-                </a>
-                <a
-                  href={siteConfig.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="button-secondary"
-                >
-                  LinkedIn
-                </a>
-                <a href={siteConfig.cvPath} download className="button-secondary">
-                  Download CV
-                </a>
-              </div>
-            </div>
-          </div>
+    <section id="contact" className="nv-section !pb-10">
+      <div className="mx-auto max-w-[1400px] space-y-10">
+        <div className="space-y-3">
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)]">
+            {title}
+          </p>
+          <AnimatedText
+            text={subtitle}
+            as="h2"
+            mode="words"
+            animateOnView
+            className="display-title max-w-3xl text-[clamp(2.2rem,6vw,4.2rem)] text-[var(--color-accent)]"
+          />
         </div>
-      </Reveal>
+
+        <Reveal>
+          <div className="flex flex-col gap-4 border-y border-black/15 py-8 md:flex-row md:items-center md:justify-between">
+            <div className="flex flex-wrap gap-2">
+              <a href={`mailto:${siteConfig.email}`} className="pill-solid">
+                {siteConfig.email}
+              </a>
+              <a
+                href={siteConfig.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="pill"
+              >
+                LinkedIn
+              </a>
+              <a
+                href={siteConfig.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="pill"
+              >
+                Instagram
+              </a>
+              <a href={siteConfig.cvPath} download className="pill">
+                Download CV
+              </a>
+            </div>
+            <p className="max-w-sm text-sm leading-7 text-[var(--color-muted)]">
+              For hiring inquiries, collaborations, or portfolio reviews —
+              reach out directly.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="grid gap-2 md:grid-cols-2 md:items-end">
+          <AnimatedText
+            text="Reandy"
+            as="p"
+            mode="chars"
+            animateOnView
+            className="display-mega text-[clamp(3.5rem,12vw,8rem)] text-[var(--color-accent)]"
+          />
+          <AnimatedText
+            text="Setiawan"
+            as="p"
+            mode="chars"
+            animateOnView
+            delay={0.1}
+            className="display-mega text-[clamp(3.5rem,12vw,8rem)] text-[var(--color-accent)] md:text-right"
+          />
+        </div>
+      </div>
     </section>
   );
 }
