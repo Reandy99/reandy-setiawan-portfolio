@@ -4,55 +4,32 @@ import { AnimatedText } from "@/components/AnimatedText";
 import { Reveal } from "@/components/Reveal";
 import { siteConfig } from "@/lib/utils";
 
-type ContactSectionProps = {
-  title?: string;
-  subtitle?: string;
-};
-
-export function ContactSection({
-  title = "Contact",
-  subtitle = "Let's create something impactful together.",
-}: ContactSectionProps) {
+export function ContactSection() {
   return (
-    <section id="contact" className="nv-section !pb-10">
-      <div className="mx-auto max-w-[1400px] space-y-10">
-        <div className="space-y-3">
-          <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)]">
-            {title}
-          </p>
-          <AnimatedText
-            text={subtitle}
-            as="h2"
-            mode="words"
-            animateOnView
-            className="display-title max-w-3xl text-[clamp(2.2rem,6vw,4.2rem)] text-[var(--color-accent)]"
-          />
-        </div>
-
+    <section id="contact" className="nv-section !pb-8">
+      <div className="nv-container space-y-12">
         <Reveal>
-          <div className="flex flex-col gap-4 border-y border-black/15 py-8 md:flex-row md:items-center md:justify-between">
-            <div className="flex flex-wrap gap-2">
-              <a href={`mailto:${siteConfig.email}`} className="pill-solid">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="flex flex-wrap items-center gap-3">
+              <a href={`mailto:${siteConfig.email}`} className="pill-solid !px-6 !py-3 !text-sm">
                 {siteConfig.email}
               </a>
+              <span className="pill">Socials</span>
               <a
                 href={siteConfig.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="pill"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/25 text-xs font-semibold text-[var(--color-foreground)] transition hover:bg-[var(--color-foreground)] hover:text-[var(--color-background)]"
               >
-                LinkedIn
+                in
               </a>
               <a
                 href={siteConfig.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="pill"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/25 text-xs font-semibold text-[var(--color-foreground)] transition hover:bg-[var(--color-foreground)] hover:text-[var(--color-background)]"
               >
-                Instagram
-              </a>
-              <a href={siteConfig.cvPath} download className="pill">
-                Download CV
+                ig
               </a>
             </div>
             <p className="max-w-sm text-sm leading-7 text-[var(--color-muted)]">
@@ -62,22 +39,27 @@ export function ContactSection({
           </div>
         </Reveal>
 
-        <div className="grid gap-2 md:grid-cols-2 md:items-end">
-          <AnimatedText
-            text="Reandy"
-            as="p"
-            mode="chars"
-            animateOnView
-            className="display-mega text-[clamp(3.5rem,12vw,8rem)] text-[var(--color-accent)]"
-          />
-          <AnimatedText
-            text="Setiawan"
-            as="p"
-            mode="chars"
-            animateOnView
-            delay={0.1}
-            className="display-mega text-[clamp(3.5rem,12vw,8rem)] text-[var(--color-accent)] md:text-right"
-          />
+        <div className="h-px w-full bg-black/15" />
+
+        <div>
+          <h2 className="sr-only">Contact {siteConfig.name}</h2>
+          <div className="flex flex-col gap-0 md:flex-row md:items-end md:justify-between">
+            <AnimatedText
+              text="reAndy"
+              as="p"
+              mode="chars"
+              animateOnView
+              className="display-mega text-[clamp(4.5rem,16vw,12rem)] text-[var(--color-foreground)]"
+            />
+            <AnimatedText
+              text="sEtiawan"
+              as="p"
+              mode="chars"
+              animateOnView
+              delay={0.12}
+              className="display-mega text-[clamp(4.5rem,16vw,12rem)] text-[var(--color-foreground)] md:text-right"
+            />
+          </div>
         </div>
       </div>
     </section>

@@ -15,7 +15,7 @@ export function CaseStudyHero({
 }: CaseStudyHeroProps) {
   return (
     <section className="nv-section !pb-8 !pt-28">
-      <div className="mx-auto max-w-[1400px] space-y-8">
+      <div className="nv-container space-y-8">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <Link href="/#work" className="pill w-fit">
             ← Back to Work
@@ -31,7 +31,7 @@ export function CaseStudyHero({
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)]">
             Case Study
           </p>
-          <h1 className="display-title text-[clamp(2.4rem,7vw,5rem)] text-[var(--color-accent)]">
+          <h1 className="display-title text-[clamp(2.8rem,8vw,6rem)] text-[var(--color-foreground)]">
             {project.title}
           </h1>
           <div className="flex flex-wrap gap-2">
@@ -58,7 +58,7 @@ export function CaseStudyHero({
               href={project.videoUrl}
               target="_blank"
               rel="noreferrer"
-              className="absolute inset-0 flex items-center justify-center bg-black/20 transition hover:bg-black/30"
+              className="absolute inset-0 flex items-center justify-center bg-black/25 transition hover:bg-black/35"
             >
               <span className="pill-solid">Play</span>
             </a>

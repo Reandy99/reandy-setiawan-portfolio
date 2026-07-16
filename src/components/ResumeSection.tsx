@@ -13,7 +13,7 @@ export function ResumeSection() {
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)]">
             Experience
           </p>
-          <h3 className="display-title text-3xl text-[var(--color-accent)]">
+          <h3 className="display-title text-4xl text-[var(--color-foreground)]">
             Professional background
           </h3>
         </div>
@@ -44,7 +44,7 @@ export function ResumeSection() {
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)]">
             Skills
           </p>
-          <h3 className="display-title text-3xl text-[var(--color-accent)]">
+          <h3 className="display-title text-4xl text-[var(--color-foreground)]">
             Core capabilities
           </h3>
           <ul className="space-y-2 text-sm leading-6 text-[var(--color-muted)]">
@@ -58,7 +58,7 @@ export function ResumeSection() {
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)]">
             Certifications
           </p>
-          <h3 className="display-title text-3xl text-[var(--color-accent)]">
+          <h3 className="display-title text-4xl text-[var(--color-foreground)]">
             Training
           </h3>
           {certifications.map((item) => (
@@ -78,7 +78,7 @@ export function ResumeSection() {
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)]">
             Education
           </p>
-          <h3 className="display-title text-3xl text-[var(--color-accent)]">
+          <h3 className="display-title text-4xl text-[var(--color-foreground)]">
             Academic
           </h3>
           {education.map((item) => (

@@ -2,24 +2,25 @@
 
 @theme inline {
   --font-sans: var(--font-manrope);
-  --font-display: var(--font-oswald);
-  --font-serif: var(--font-oswald);
+  --font-display: var(--font-bebas);
+  --font-serif: var(--font-bebas);
   --color-background: #e3e3df;
   --color-surface: #ecece8;
   --color-surface-alt: #d8d8d2;
   --color-border: #00000040;
-  --color-foreground: #1b1b1b;
+  --color-foreground: #33423a;
   --color-muted: #000000bf;
   --color-accent: #33423a;
   --color-accent-soft: #abb7aa;
+  --color-ink: #000000;
   --color-button-primary: #33423a;
   --color-button-primary-hover: #243129;
 }
 
 :root {
   color-scheme: light;
-  --title-size: clamp(4.5rem, 14vw, 11rem);
-  --gap: calc(var(--title-size) * 0.12);
+  --title-size: clamp(4rem, 17.5vw, 14rem);
+  --section-pad: clamp(4rem, 10vw, 9.5rem);
   --animation-primary: 0.55s cubic-bezier(0.6, 0, 0.4, 1);
 }
 
@@ -45,7 +46,7 @@ a {
 
 ::selection {
   background: var(--color-accent-soft);
-  color: var(--color-foreground);
+  color: #000;
 }
 
 .page-shell {
@@ -54,32 +55,78 @@ a {
 }
 
 @layer components {
-  .section-shell {
-    @apply mx-auto w-full max-w-[1400px] px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24;
+  .nv-container {
+    @apply mx-auto w-full max-w-[1440px] px-4 sm:px-6 md:px-8;
   }
 
   .nv-section {
-    @apply relative w-full px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-28;
+    padding-top: var(--section-pad);
+    padding-bottom: var(--section-pad);
+  }
+
+  .section-shell {
+    @apply mx-auto w-full max-w-[1440px] px-4 sm:px-6 md:px-8;
+    padding-top: var(--section-pad);
+    padding-bottom: var(--section-pad);
+  }
+
+  .display-mega {
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 0.82;
+    text-transform: uppercase;
+  }
+
+  .display-title {
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 0.88;
+    text-transform: uppercase;
+  }
+
+  .headline-title {
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+    text-transform: uppercase;
   }
 
   .pill {
-    @apply inline-flex items-center justify-center rounded-full border px-4 py-2 text-[11px] font-medium tracking-[0.02em] transition duration-300 sm:text-xs;
-    border-color: rgba(0, 0, 0, 0.35);
+    @apply inline-flex items-center justify-center rounded-full border px-4 py-2 text-[11px] font-medium transition duration-300 sm:text-xs;
+    border-color: rgba(51, 66, 58, 0.45);
     color: var(--color-foreground);
     background: transparent;
   }
 
-  .pill:hover {
+  .pill:hover,
+  .pill[data-active="true"] {
     background: var(--color-accent);
     border-color: var(--color-accent);
-    color: #e3e3df;
+    color: var(--color-background);
+  }
+
+  .pill-dark {
+    @apply inline-flex items-center justify-center rounded-full border px-4 py-2 text-[11px] font-medium transition duration-300 sm:text-xs;
+    border-color: rgba(227, 227, 223, 0.35);
+    color: var(--color-accent-soft);
+    background: transparent;
+  }
+
+  .pill-dark:hover,
+  .pill-dark[data-active="true"] {
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent-soft);
+    color: #000;
   }
 
   .pill-solid {
-    @apply pill;
+    @apply inline-flex items-center justify-center rounded-full border px-4 py-2 text-[11px] font-medium transition duration-300 sm:text-xs;
     background: var(--color-accent);
     border-color: var(--color-accent);
-    color: #e3e3df;
+    color: var(--color-background);
   }
 
   .pill-solid:hover {
@@ -87,56 +134,58 @@ a {
     border-color: #243129;
   }
 
-  .pill-light {
-    @apply inline-flex items-center justify-center rounded-full border px-4 py-2 text-[11px] font-medium tracking-[0.02em] transition duration-300 sm:text-xs;
-    border-color: rgba(255, 255, 255, 0.45);
-    color: #f4f4f0;
-    background: rgba(0, 0, 0, 0.28);
+  .pill-hero {
+    @apply inline-flex items-center justify-center rounded-full border px-4 py-2 text-[11px] font-medium transition duration-300 sm:text-xs;
+    border-color: rgba(255, 255, 255, 0.28);
+    color: #f2f2ee;
+    background: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(10px);
   }
 
-  .pill-light:hover {
-    background: rgba(255, 255, 255, 0.92);
-    border-color: rgba(255, 255, 255, 0.92);
-    color: #1b1b1b;
-  }
-
-  .display-mega {
-    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 0.86;
-    text-transform: uppercase;
-  }
-
-  .display-title {
-    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 0.92;
-    text-transform: uppercase;
-  }
-
-  .headline-title {
-    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    text-transform: uppercase;
+  .pill-hero:hover {
+    background: #fff;
+    border-color: #fff;
+    color: #000;
   }
 
   .surface-card {
-    @apply rounded-none border p-5 sm:p-6;
+    @apply border p-5 sm:p-6;
     border-color: var(--color-border);
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.28);
   }
 
   .button-primary {
-    @apply pill-solid min-h-11 px-5 text-sm;
+    @apply inline-flex min-h-11 items-center justify-center rounded-full border px-5 py-2 text-sm font-medium transition duration-300;
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-background);
+  }
+
+  .button-primary:hover {
+    background: #243129;
+    border-color: #243129;
   }
 
   .button-secondary {
-    @apply pill min-h-11 px-5 text-sm;
+    @apply inline-flex min-h-11 items-center justify-center rounded-full border px-5 py-2 text-sm font-medium transition duration-300;
+    border-color: rgba(51, 66, 58, 0.45);
+    color: var(--color-foreground);
+    background: transparent;
+  }
+
+  .button-secondary:hover {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-background);
+  }
+
+  .marquee {
+    @apply relative overflow-hidden;
+  }
+
+  .marquee-track {
+    @apply flex w-max gap-10;
+    animation: marquee-scroll 28s linear infinite;
   }
 
   .ambient-audio-control {
@@ -146,7 +195,7 @@ a {
   .ambient-audio-button {
     @apply inline-flex items-center gap-2.5 rounded-full border px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.24em] transition sm:gap-3 sm:px-4 sm:py-2.5 sm:text-[10px] sm:tracking-[0.28em];
     border-color: rgba(0, 0, 0, 0.2);
-    background: rgba(227, 227, 223, 0.9);
+    background: rgba(227, 227, 223, 0.92);
     color: var(--color-foreground);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
     backdrop-filter: blur(12px);
@@ -157,8 +206,8 @@ a {
   }
 
   .ambient-audio-button--active {
-    background: rgba(51, 66, 58, 0.95);
-    color: #e3e3df;
+    background: rgba(0, 0, 0, 0.92);
+    color: var(--color-accent-soft);
     border-color: rgba(255, 255, 255, 0.08);
   }
 
@@ -210,5 +259,14 @@ a {
 
   50% {
     transform: scaleY(1.15);
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
