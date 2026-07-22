@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 import type { Project } from "@/data/projects";
 import { getProjectThumbnailSrc } from "@/lib/project-media";
+import { useMotionPrefs } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 type ProjectCardProps = {
@@ -14,57 +15,102 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
-  const href = project.cardUrl ?? `/work/${project.slug}`;
-  const isExternal = Boolean(project.cardUrl);
+  const { fadeUp, transition } = useMotionPrefs();
+  const href = project.cardUrl ?? project.videoUrl ?? `/work/${project.slug}`;
+  const isExternal = Boolean(project.cardUrl || project.videoUrl);
+  const caseStudyHref = `/work/${project.slug}`;
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      layout
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.35, delay: index * 0.05 }}
-      className="group"
+      transition={transition(index * 0.04)}
+      className="group h-full"
     >
-      <Link
-        href={href}
-        target={isExternal ? "_blank" : undefined}
-        rel={isExternal ? "noreferrer" : undefined}
-        className="surface-card block overflow-hidden p-0 transition hover:border-black/12"
-      >
-        <div
-          className={cn(
-            "relative aspect-[4/3] overflow-hidden rounded-[18px] rounded-b-none",
-            project.thumbnailFit === "contain" ? "bg-[#eef1f5]" : "bg-[#ecebe7]",
-          )}
+      <div className="flex h-full flex-col overflow-hidden rounded-[18px] border border-white/9 bg-[var(--color-surface)] transition hover:border-white/16">
+        <a
+          href={href}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
+          className="block"
+          aria-label={
+            isExternal
+              ? `Open ${project.title} externally`
+              : `Open ${project.title} case study`
+          }
         >
-          <Image
-            src={getProjectThumbnailSrc(project)}
-            alt={`${project.title} project thumbnail`}
-            fill
-            className={cn(
-              "transition duration-500 group-hover:scale-[1.02]",
-              project.thumbnailFit === "contain" ? "object-contain p-1" : "object-cover",
-            )}
-            sizes="(min-width: 1280px) 24vw, (min-width: 768px) 33vw, 100vw"
-          />
-        </div>
-        <div className="flex items-start justify-between gap-3 p-4">
-          <div className="space-y-1.5">
-            <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
-              {project.category.join(" · ")}
-            </p>
-            <h3 className="text-sm font-semibold leading-5 text-[var(--color-foreground)] md:text-base">
-              {project.title}
-            </h3>
-            <p className="text-[11px] leading-5 text-[var(--color-muted)]">
-              {project.summary}
-            </p>
+          <div className="relative aspect-[16/10] overflow-hidden bg-[#121218]">
+            <Image
+              src={getProjectThumbnailSrc(project)}
+              alt={`${project.title} project thumbnail`}
+              fill
+              quality={90}
+              className={cn(
+                "transition duration-500 group-hover:scale-[1.03]",
+                project.thumbnailFit === "contain"
+                  ? "object-contain p-3"
+                  : "object-cover",
+              )}
+              style={
+                project.thumbnailPosition
+                  ? { objectPosition: project.thumbnailPosition }
+                  : undefined
+              }
+              sizes="(min-width: 1280px) 30vw, (min-width: 768px) 45vw, 100vw"
+            />
+            <span
+              aria-hidden
+              className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-black/40 text-xs text-white backdrop-blur transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            >
+              ↗
+            </span>
           </div>
-          <span className="text-sm text-[var(--color-muted)] transition group-hover:text-[var(--color-foreground)]">
-            ↗
-          </span>
+        </a>
+
+        <div className="flex flex-1 flex-col space-y-2.5 p-4">
+          <p className="text-[10px] uppercase tracking-[0.16em] text-[var(--color-muted)]">
+            {project.category.join(" · ")}
+          </p>
+          <h3 className="line-clamp-2 min-h-[3rem] text-base font-semibold leading-6 text-[var(--color-foreground)] md:text-lg md:leading-7 md:min-h-[3.5rem]">
+            <Link href={caseStudyHref} className="transition hover:opacity-80">
+              {project.title}
+            </Link>
+          </h3>
+          <p className="line-clamp-2 min-h-[3rem] flex-1 text-sm leading-6 text-[var(--color-muted)]">
+            {project.summary}
+          </p>
+          <div className="mt-auto flex flex-wrap gap-3 pt-1">
+            <Link href={caseStudyHref} className="text-link text-xs">
+              View case study
+            </Link>
+            {project.videoUrl ? (
+              <a
+                href={project.videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-link text-xs"
+              >
+                Watch video
+              </a>
+            ) : null}
+            {project.cardUrl ? (
+              <a
+                href={project.cardUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-link text-xs"
+              >
+                {project.cardUrl.includes("linkedin.com")
+                  ? "View on LinkedIn"
+                  : "Visit portfolio"}
+              </a>
+            ) : null}
+          </div>
         </div>
-      </Link>
+      </div>
     </motion.article>
   );
 }

@@ -1,3 +1,10 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+import { useMotionPrefs } from "@/lib/motion";
+import { cn } from "@/lib/utils";
+
 type SectionHeaderProps = {
   eyebrow?: string;
   title: string;
@@ -11,27 +18,43 @@ export function SectionHeader({
   description,
   align = "left",
 }: SectionHeaderProps) {
+  const {
+    prefersReducedMotion,
+    sectionContainer,
+    sectionEyebrow,
+    sectionTitle,
+    sectionDescription,
+  } = useMotionPrefs();
+
+  const motionInitial = prefersReducedMotion ? "visible" : "hidden";
+
   return (
-    <div
-      className={
-        align === "center"
-          ? "mx-auto max-w-3xl space-y-3 text-center"
-          : "max-w-3xl space-y-3"
-      }
+    <motion.div
+      variants={sectionContainer}
+      initial={motionInitial}
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
+      className={cn(
+        "space-y-3",
+        align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl",
+      )}
     >
       {eyebrow ? (
-        <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
+        <motion.p variants={sectionEyebrow} className="eyebrow">
           {eyebrow}
-        </p>
+        </motion.p>
       ) : null}
-      <h2 className="text-balance font-serif text-[1.55rem] leading-tight text-[var(--color-foreground)] sm:text-[1.85rem] md:text-[2.2rem]">
+      <motion.h2 variants={sectionTitle} className="display-title">
         {title}
-      </h2>
+      </motion.h2>
       {description ? (
-        <p className="text-sm leading-7 text-[var(--color-muted)]">
+        <motion.p
+          variants={sectionDescription}
+          className="max-w-2xl text-sm leading-7 text-[var(--color-muted)] md:text-[15px]"
+        >
           {description}
-        </p>
+        </motion.p>
       ) : null}
-    </div>
+    </motion.div>
   );
 }

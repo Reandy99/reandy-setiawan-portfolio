@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Reandy Setiawan",
-  title: "Reandy Setiawan - Creative Producer & AI Workflow Builder",
+  title: "Reandy Setiawan — Creative Producer & AI Workflow Builder",
   description:
-    "Creative producer and AI workflow builder with a decade in photo, video, and campaign work — building systems that turn one shoot into weeks of content.",
+    "Creative producer, photographer, videographer, and AI workflow builder based in Jakarta, Indonesia. Available for creative marketing, content operations, visual production, and remote APAC opportunities.",
   role: "Creative Producer & AI Workflow Builder",
   heroHeadline: "Creative Producer & AI Workflow Builder",
   heroSubhead:
@@ -15,11 +15,12 @@ export const siteConfig = {
   email: "Reandysetiawan1@gmail.com",
   linkedin:
     "https://www.linkedin.com/in/reandy-setiawan?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
-  instagram: "https://instagram.com/reandy.setiawan",
+  instagram: "https://www.instagram.com/reandysetiawan/",
   github: "https://github.com/Reandy99/reandy-setiawan-portfolio",
   baseUrl: "https://reandysetiawan.my.id",
   cvPath: "/assets/resume/reandy-setiawan-cv.pdf",
-  profileImage: "/images/reandy-profile.jpg",
+  profileImage: "/images/reandy-profile-hero.jpg",
+  profileImageOriginal: "/images/reandy-profile.jpg",
   ambientAudioSrc: "/audio/ambient.mp3",
   ambientAudioTitle: "Calm Ambient Dreamscape",
   ambientAudioArtist: "morgan-ambient",
@@ -29,9 +30,16 @@ export const siteConfig = {
 
 export const externalPortfolios = [
   {
-    title: "Whitepaper Photography",
+    title: "WhitePaper",
     href: "https://whitepaper.my.id/",
     image: "/images/portfolio-sites/whitepaper-home.png",
+    accent: "violet" as const,
+    tags: [
+      "Corporate photo and video",
+      "Event documentation",
+      "Company profile",
+      "Business visual assets",
+    ],
     description:
       "Corporate photo and video portfolio focused on event documentation, company profile production, and business-ready visual assets.",
   },
@@ -39,6 +47,13 @@ export const externalPortfolios = [
     title: "Jia Photography",
     href: "https://www.jiaphotography.site/",
     image: "/images/portfolio-sites/jia-home.png",
+    accent: "warm" as const,
+    tags: [
+      "Family",
+      "Graduation",
+      "Prewedding",
+      "Birthday and personal milestone photography",
+    ],
     description:
       "Warm, clean photography portfolio covering family sessions, graduations, preweddings, birthdays, and intimate celebrations.",
   },
@@ -46,16 +61,26 @@ export const externalPortfolios = [
     title: "FrameFlow",
     href: "https://www.frameflow.my.id",
     image: "/images/portfolio-sites/frameflow-home.png",
+    accent: "blue" as const,
+    tags: [
+      "Workflow platform concept",
+      "Lead management",
+      "Proposals",
+      "Invoices",
+      "Follow-ups for photographers and videographers",
+    ],
     description:
       "A workflow platform concept built for photographers and videographers in Indonesia to manage leads, proposals, invoices, and follow-ups.",
   },
 ] as const;
 
 export const navigation = [
-  { href: "/", label: "Home" },
-  { href: "/#work", label: "Work" },
-  { href: "/#resume", label: "Resume" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/#home", label: "Home", sectionId: "home" },
+  { href: "/#selected-work", label: "Selected Work", sectionId: "selected-work" },
+  { href: "/#capabilities", label: "Capabilities", sectionId: "capabilities" },
+  { href: "/#experience", label: "Experience", sectionId: "experience" },
+  { href: "/#about", label: "About", sectionId: "about" },
+  { href: "/#contact", label: "Contact", sectionId: "contact" },
 ] as const;
 
 export function cn(...classes: Array<string | false | null | undefined>) {

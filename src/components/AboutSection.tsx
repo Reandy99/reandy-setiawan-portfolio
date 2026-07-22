@@ -1,54 +1,41 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 
-import { aboutCopy, toolTags } from "@/data/experience";
-import { SectionHeader } from "@/components/SectionHeader";
+import { aboutClosing, aboutCopy, aboutLabels } from "@/data/experience";
+import { useMotionPrefs } from "@/lib/motion";
 
 export function AboutSection() {
-  return (
-    <section className="section-shell">
-      <div className="grid gap-6 lg:grid-cols-2">
-        <motion.article
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.4 }}
-          className="surface-card space-y-5"
-        >
-          <SectionHeader eyebrow="About Me" title="Strategy, craft, and calm execution." />
-          <p className="text-base leading-8 text-[var(--color-muted)]">
-            {aboutCopy}
-          </p>
-          <Link href="/#resume" className="button-secondary">
-            More About Me
-          </Link>
-        </motion.article>
+  const { fadeUp, transition } = useMotionPrefs();
 
-        <motion.article
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.4, delay: 0.06 }}
-          className="surface-card space-y-5"
-        >
-          <SectionHeader
-            eyebrow="Tools & Expertise"
-            title="A compact toolkit for production and workflow."
-          />
-          <div className="flex flex-wrap gap-2">
-            {toolTags.map((tool) => (
-              <span
-                key={tool}
-                className="rounded-full border border-black/8 bg-[#f5f4f1] px-3 py-2 text-sm text-[var(--color-foreground)]"
-              >
-                {tool}
-              </span>
-            ))}
-          </div>
-        </motion.article>
-      </div>
+  return (
+    <section id="about" className="section-shell">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-40px" }}
+        transition={transition()}
+        className="mx-auto max-w-3xl space-y-5"
+      >
+        <p className="eyebrow">About</p>
+        <div className="flex flex-wrap gap-2">
+          {aboutLabels.map((label) => (
+            <span key={label} className="chip">
+              {label}
+            </span>
+          ))}
+        </div>
+        <h2 className="display-title max-w-xl">
+          Strategy, craft, and reliable execution.
+        </h2>
+        <p className="max-w-xl text-sm leading-7 text-[var(--color-muted)] md:text-[15px]">
+          {aboutCopy}
+        </p>
+        <p className="max-w-xl border-l border-[rgba(167,139,250,0.4)] pl-4 text-sm leading-7 text-[var(--color-foreground)] md:text-[15px]">
+          {aboutClosing}
+        </p>
+      </motion.div>
     </section>
   );
 }

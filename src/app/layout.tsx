@@ -4,6 +4,7 @@ import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
 import { AmbientAudioControl } from "@/components/AmbientAudioControl";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { SiteBackground } from "@/components/SiteBackground";
 import { siteConfig } from "@/lib/utils";
 
 import "./globals.css";
@@ -26,17 +27,21 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  alternates: {
+    canonical: siteConfig.baseUrl,
+  },
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
     type: "website",
     url: siteConfig.baseUrl,
+    siteName: siteConfig.name,
     images: [
       {
-        url: siteConfig.profileImage,
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: `Portrait of ${siteConfig.name}`,
+        alt: `${siteConfig.name} — ${siteConfig.role}`,
       },
     ],
   },
@@ -44,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [siteConfig.profileImage],
+    images: ["/opengraph-image"],
   },
 };
 
@@ -77,11 +82,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <div className="page-shell">
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <AmbientAudioControl />
+          <SiteBackground />
+          <div className="page-shell__content">
+            <Navbar />
+            <main id="main-content">{children}</main>
+            <Footer />
+            <AmbientAudioControl />
+          </div>
         </div>
       </body>
     </html>

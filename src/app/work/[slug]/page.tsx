@@ -12,7 +12,9 @@ type WorkDetailPageProps = {
 };
 
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return projects
+    .filter((project) => !project.hidden)
+    .map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({
@@ -21,13 +23,16 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProjectBySlug(slug);
 
-  if (!project) {
+  if (!project || project.hidden) {
     return { title: "Project not found" };
   }
 
   return {
     title: project.title,
     description: project.summary,
+    alternates: {
+      canonical: `${siteConfig.baseUrl}/work/${project.slug}`,
+    },
     openGraph: {
       title: `${project.title} | ${siteConfig.name}`,
       description: project.summary,
@@ -45,7 +50,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
 
-  if (!project) {
+  if (!project || project.hidden) {
     notFound();
   }
 
@@ -66,12 +71,14 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
               {project.overview}
             </p>
             <div className="space-y-3 text-sm text-[var(--color-muted)]">
-              <p>
-                <span className="font-semibold text-[var(--color-foreground)]">
-                  Role:
-                </span>{" "}
-                {project.role}
-              </p>
+              {project.role ? (
+                <p>
+                  <span className="font-semibold text-[var(--color-foreground)]">
+                    Role:
+                  </span>{" "}
+                  {project.role}
+                </p>
+              ) : null}
               <p>
                 <span className="font-semibold text-[var(--color-foreground)]">
                   Deliverables:
@@ -97,7 +104,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
                         key={link.href}
                         href={link.href}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="button-secondary"
                       >
                         {link.label}
@@ -115,7 +122,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
               {project.highlights.map((item) => (
                 <li key={item} className="flex gap-3">
                   <span
-                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-foreground)]"
+                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent-soft)]"
                     aria-hidden
                   />
                   {item}

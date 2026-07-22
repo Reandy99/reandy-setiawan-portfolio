@@ -3,18 +3,24 @@
 @theme inline {
   --font-sans: var(--font-manrope);
   --font-serif: var(--font-plus-jakarta-sans);
-  --color-background: #f5f4f0;
-  --color-surface: #ffffff;
-  --color-surface-alt: #efede8;
-  --color-border: #dfddd8;
-  --color-foreground: #242320;
-  --color-muted: #7a766f;
-  --color-button-primary: #171717;
-  --color-button-primary-hover: #2a2a2a;
+  --color-background: #07070a;
+  --color-surface: #0e0e13;
+  --color-surface-elevated: #15151c;
+  --color-border: rgba(255, 255, 255, 0.09);
+  --color-foreground: #f4f1ea;
+  --color-muted: #a4a4b0;
+  --color-accent: #8b5cf6;
+  --color-accent-soft: #a78bfa;
+  --color-workflow: #38bdf8;
+  --color-button-primary: #8b5cf6;
+  --color-button-primary-hover: #7c4ded;
 }
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
+  --radius-card: 1.25rem;
+  --radius-button: 0.625rem;
+  --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.35);
 }
 
 * {
@@ -23,6 +29,21 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 body {
@@ -38,52 +59,113 @@ a {
 }
 
 ::selection {
-  background: #d9d6ce;
-  color: #171717;
+  background: rgba(139, 92, 246, 0.35);
+  color: #f4f1ea;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-soft);
+  outline-offset: 3px;
 }
 
 .page-shell {
+  position: relative;
   min-height: 100vh;
-  background-image:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.72), transparent 36%),
-    radial-gradient(circle at top right, rgba(235, 232, 224, 0.42), transparent 26%);
+  isolation: isolate;
+  background: var(--color-background);
+}
+
+.page-shell__content {
+  position: relative;
+  z-index: 1;
+}
+
+.site-bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.page-shell::before {
+  content: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-160%);
+  border-radius: var(--radius-button);
+  background: var(--color-accent);
+  color: white;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 @layer components {
   .section-shell {
-    @apply mx-auto max-w-7xl px-4 py-10 sm:px-5 sm:py-12 md:px-8 md:py-14;
+    @apply mx-auto max-w-7xl px-4 py-16 sm:px-5 sm:py-20 md:px-8 md:py-24;
   }
 
   .surface-card {
-    @apply rounded-[18px] border p-4 sm:rounded-[22px] sm:p-5 md:p-6;
+    @apply rounded-[20px] border p-4 sm:rounded-[22px] sm:p-5 md:p-6;
     border-color: var(--color-border);
     background: var(--color-surface);
-    box-shadow: 0 1px 4px rgba(10, 10, 10, 0.02);
+    box-shadow: var(--shadow-soft);
   }
 
   .button-primary {
-    @apply inline-flex min-h-10 items-center justify-center rounded-md border px-4 py-2.5 text-xs font-semibold transition;
-    border-color: rgba(0, 0, 0, 0.05);
-    background: var(--color-button-primary);
+    @apply inline-flex min-h-11 items-center justify-center rounded-[10px] border px-5 py-2.5 text-xs font-semibold tracking-[0.02em] transition;
+    border-color: rgba(167, 139, 250, 0.35);
+    background: linear-gradient(180deg, #9b6dff 0%, var(--color-button-primary) 100%);
     color: white;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 10px 28px rgba(139, 92, 246, 0.22);
   }
 
   .button-primary:hover {
-    background: var(--color-button-primary-hover);
+    background: linear-gradient(180deg, #a78bfa 0%, var(--color-button-primary-hover) 100%);
   }
 
   .button-secondary {
-    @apply inline-flex min-h-10 items-center justify-center rounded-md border px-4 py-2.5 text-xs font-semibold transition;
+    @apply inline-flex min-h-11 items-center justify-center rounded-[10px] border px-5 py-2.5 text-xs font-semibold tracking-[0.02em] transition;
     border-color: var(--color-border);
-    background: white;
+    background: rgba(255, 255, 255, 0.03);
     color: var(--color-foreground);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
   }
 
   .button-secondary:hover {
-    border-color: rgba(0, 0, 0, 0.12);
-    background: #fafafa;
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .text-link {
+    @apply text-sm font-medium text-[var(--color-foreground)];
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size 0.3s ease, color 0.3s ease;
+  }
+
+  .text-link:hover {
+    background-size: 100% 1px;
+    color: var(--color-accent-soft);
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border px-3 py-1.5 text-[11px] font-medium tracking-[0.04em];
+    border-color: var(--color-border);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-muted);
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)];
+  }
+
+  .display-title {
+    @apply text-balance font-serif text-[1.7rem] leading-[1.1] tracking-[-0.03em] text-[var(--color-foreground)] sm:text-[2rem] md:text-[2.4rem];
   }
 
   .ambient-audio-control {
@@ -91,22 +173,22 @@ a {
   }
 
   .ambient-audio-button {
-    @apply inline-flex items-center gap-2.5 rounded-full border px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.24em] transition sm:gap-3 sm:px-4 sm:py-2.5 sm:text-[10px] sm:tracking-[0.28em];
-    border-color: rgba(0, 0, 0, 0.08);
-    background: rgba(255, 255, 255, 0.88);
+    @apply inline-flex min-h-11 items-center gap-2.5 rounded-full border px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.24em] transition sm:gap-3 sm:px-4 sm:py-2.5 sm:text-[10px] sm:tracking-[0.28em];
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(14, 14, 19, 0.88);
     color: var(--color-foreground);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
     backdrop-filter: blur(12px);
   }
 
   .ambient-audio-button:hover {
-    background: rgba(255, 255, 255, 0.96);
+    background: rgba(21, 21, 28, 0.96);
   }
 
   .ambient-audio-button--active {
-    background: rgba(23, 23, 23, 0.94);
+    background: rgba(139, 92, 246, 0.22);
     color: white;
-    border-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(167, 139, 250, 0.35);
   }
 
   .ambient-audio-bars {
@@ -158,4 +240,27 @@ a {
   50% {
     transform: scaleY(1.15);
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-audio-bar--active {
+    animation: none;
+  }
+}
+
+/* Background preview — grain utility for motion layers */
+.bg-preview-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.bg-preview-root {
+  position: relative;
+  min-height: 100vh;
+  isolation: isolate;
+  color: #f4f1ea;
+}
+
+.bg-preview-content {
+  position: relative;
+  z-index: 2;
 }

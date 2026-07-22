@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useEffect, useId, useRef, useState } from "react";
 
+import { MobileMenu } from "@/components/MobileMenu";
 import { cn, navigation, siteConfig } from "@/lib/utils";
 
 function MenuIcon({ open }: { open: boolean }) {
@@ -34,10 +35,66 @@ function MenuIcon({ open }: { open: boolean }) {
 
 export function Navbar() {
   const pathname = usePathname();
+  const menuId = useId();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const prefersReducedMotion = useReducedMotion();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    setMenuOpen(false);
+    const frame = requestAnimationFrame(() => {
+      setMenuOpen(false);
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [pathname]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      return;
+    }
+
+    const sectionIds = navigation.map((item) => item.sectionId);
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((element): element is HTMLElement => Boolean(element));
+
+    if (!elements.length) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible[0]?.target.id) {
+          setActiveSection(visible[0].target.id);
+        }
+      },
+      {
+        rootMargin: "-35% 0px -45% 0px",
+        threshold: [0.15, 0.35, 0.55],
+      },
+    );
+
+    for (const element of elements) {
+      observer.observe(element);
+    }
+
+    return () => observer.disconnect();
   }, [pathname]);
 
   useEffect(() => {
@@ -47,25 +104,46 @@ export function Navbar() {
     };
   }, [menuOpen]);
 
-  const isActive = (href: string) => {
-    if (href === "/" || href.startsWith("/#")) {
-      return pathname === "/";
+  useEffect(() => {
+    if (!menuOpen) {
+      return;
     }
 
-    return pathname === href || pathname.startsWith(`${href}/`);
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
+  const isActive = (sectionId: string) => {
+    if (pathname !== "/") {
+      return false;
+    }
+
+    return activeSection === sectionId;
   };
 
   return (
     <motion.header
-      initial={{ y: -12, opacity: 0 }}
+      initial={prefersReducedMotion ? false : { y: -12, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.45 }}
-      className="sticky top-0 z-50 border-b border-black/6 bg-[rgba(245,244,240,0.94)] backdrop-blur-xl"
+      transition={{ duration: prefersReducedMotion ? 0 : 0.45 }}
+      className={cn(
+        "sticky top-0 z-50 border-b transition-[background,border-color,backdrop-filter] duration-300",
+        scrolled
+          ? "border-white/8 bg-[rgba(7,7,10,0.78)] backdrop-blur-xl"
+          : "border-transparent bg-transparent",
+      )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-5 md:px-8">
-        <div className="flex h-14 items-center justify-between gap-3 md:h-[3.75rem]">
-          <Link href="/" className="flex min-w-0 items-center gap-2.5 sm:gap-3">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-black/10 bg-white text-[11px] font-semibold text-[var(--color-foreground)]">
+        <div className="flex h-14 items-center justify-between gap-3 md:h-[4rem]">
+          <Link href="/#home" className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-[var(--color-surface)] text-[11px] font-semibold tracking-[0.08em] text-[var(--color-foreground)]">
               RS
             </span>
             <span className="truncate text-sm font-medium tracking-[0.01em] text-[var(--color-foreground)]">
@@ -74,7 +152,7 @@ export function Navbar() {
           </Link>
 
           <nav
-            className="hidden items-center gap-5 text-[11px] text-[var(--color-muted)] md:flex"
+            className="hidden items-center gap-5 text-[11px] text-[var(--color-muted)] lg:flex"
             aria-label="Primary"
           >
             {navigation.map((item) => (
@@ -83,8 +161,8 @@ export function Navbar() {
                 href={item.href}
                 className={cn(
                   "border-b border-transparent pb-1 transition-colors hover:text-[var(--color-foreground)]",
-                  isActive(item.href) &&
-                    "border-[var(--color-foreground)] text-[var(--color-foreground)]",
+                  isActive(item.sectionId) &&
+                    "border-[var(--color-accent-soft)] text-[var(--color-foreground)]",
                 )}
               >
                 {item.label}
@@ -101,10 +179,11 @@ export function Navbar() {
             </Link>
 
             <button
+              ref={menuButtonRef}
               type="button"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-black/10 bg-white text-[var(--color-foreground)] transition hover:border-black/16 md:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-[var(--color-surface)] text-[var(--color-foreground)] transition hover:border-white/20 lg:hidden"
               aria-expanded={menuOpen}
-              aria-controls="mobile-navigation"
+              aria-controls={menuId}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               onClick={() => {
                 setMenuOpen((open) => !open);
@@ -118,61 +197,14 @@ export function Navbar() {
 
       <AnimatePresence>
         {menuOpen ? (
-          <>
-            <motion.button
-              type="button"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 top-14 z-40 bg-black/20 md:hidden"
-              aria-label="Close menu"
-              onClick={() => {
-                setMenuOpen(false);
-              }}
-            />
-            <motion.div
-              id="mobile-navigation"
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.22 }}
-              className="absolute left-0 right-0 top-full z-50 border-b border-black/8 bg-[rgba(245,244,240,0.98)] shadow-[0_18px_40px_rgba(0,0,0,0.08)] backdrop-blur-xl md:hidden"
-            >
-              <nav className="mx-auto max-w-7xl px-4 py-4 sm:px-5" aria-label="Mobile">
-                <div className="flex flex-col gap-1">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={cn(
-                        "rounded-xl px-3 py-3 text-sm font-medium transition",
-                        isActive(item.href)
-                          ? "bg-white text-[var(--color-foreground)]"
-                          : "text-[var(--color-muted)] hover:bg-white/70 hover:text-[var(--color-foreground)]",
-                      )}
-                      onClick={() => {
-                        setMenuOpen(false);
-                      }}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-                <div className="mt-4 border-t border-black/6 pt-4">
-                  <Link
-                    href="/#contact"
-                    className="button-primary w-full"
-                    onClick={() => {
-                      setMenuOpen(false);
-                    }}
-                  >
-                    Let&apos;s Connect
-                  </Link>
-                </div>
-              </nav>
-            </motion.div>
-          </>
+          <MobileMenu
+            id={menuId}
+            activeSection={activeSection}
+            onClose={() => {
+              setMenuOpen(false);
+              menuButtonRef.current?.focus();
+            }}
+          />
         ) : null}
       </AnimatePresence>
     </motion.header>

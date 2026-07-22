@@ -1,59 +1,103 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+import { HeroVisual } from "@/components/HeroVisual";
+import { MetricItem } from "@/components/MetricItem";
+import { stats } from "@/data/experience";
+import { useMotionPrefs } from "@/lib/motion";
 import { siteConfig } from "@/lib/utils";
 
 export function Hero() {
+  const {
+    prefersReducedMotion,
+    heroStaggerContainer,
+    heroHeadlineContainer,
+    heroEyebrow,
+    heroLine,
+    heroMuted,
+    heroCta,
+  } = useMotionPrefs();
+
+  const motionInitial = prefersReducedMotion ? "visible" : "hidden";
+
   return (
-    <section className="section-shell pb-8 pt-10 md:pt-14">
-      <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+    <section id="home" className="section-shell relative overflow-hidden pb-10 pt-8 md:pb-16 md:pt-12">
+      <div className="grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }}
-          className="space-y-7"
+          variants={heroStaggerContainer}
+          initial={motionInitial}
+          animate="visible"
+          className="order-1 flex max-w-2xl flex-col gap-5"
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">
-            Hi, I&apos;m Reandy Setiawan
-          </p>
-          <h1 className="max-w-4xl font-serif text-5xl leading-[0.96] tracking-[-0.025em] text-[var(--color-foreground)] md:text-6xl lg:text-[5rem]">
-            Creative Marketing, Photography, Video &amp; AI-Assisted Works
-          </h1>
-          <p className="max-w-2xl text-lg leading-8 text-[var(--color-muted)]">
-            I combine 10+ years of hands-on experience in content creation and
-            marketing with AI-powered workflows to craft visual stories that
-            engage and deliver results.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Link href="/#selected-work" className="button-primary">
-              View Selected Work
-            </Link>
-            <a href={siteConfig.cvPath} download className="button-secondary">
-              Download CV
+          <motion.p
+            variants={heroEyebrow}
+            className="eyebrow text-[var(--color-accent-soft)]"
+          >
+            {siteConfig.heroMeta}
+          </motion.p>
+
+          <motion.h1
+            variants={heroHeadlineContainer}
+            className="text-balance font-serif text-[2.15rem] leading-[1.05] tracking-[-0.035em] text-[var(--color-foreground)] sm:text-5xl md:text-[3.2rem] lg:text-[3.55rem]"
+          >
+            <motion.span variants={heroLine} className="block">
+              Creative Producer &amp;
+            </motion.span>
+            <motion.span variants={heroLine} className="block">
+              AI Workflow Builder
+            </motion.span>
+          </motion.h1>
+
+          <motion.p
+            variants={heroMuted}
+            className="text-sm leading-7 text-[var(--color-muted)] md:text-[15px]"
+          >
+            {siteConfig.heroSubhead}
+          </motion.p>
+
+          <motion.p
+            variants={heroMuted}
+            className="text-sm leading-7 text-[var(--color-foreground)] md:text-[15px]"
+          >
+            {siteConfig.openFor}
+          </motion.p>
+
+          <motion.div variants={heroCta} className="flex flex-col gap-4 pt-1">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Link href="/#selected-work" className="button-primary">
+                View Selected Work
+              </Link>
+              <a href={siteConfig.cvPath} download className="button-secondary">
+                Download CV
+              </a>
+            </div>
+            <a
+              href={siteConfig.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-link w-fit"
+            >
+              Connect on LinkedIn
             </a>
-          </div>
+          </motion.div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.985 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.08 }}
-          className="surface-card overflow-hidden p-3"
-        >
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-[#ecebe7]">
-            <Image
-              src={siteConfig.profileImage}
-              alt="Portrait of Reandy Setiawan"
-              fill
-              className="object-cover"
-              sizes="(min-width: 1024px) 40vw, 100vw"
-              priority
-            />
-          </div>
-        </motion.div>
+        <div className="order-2">
+          <HeroVisual />
+        </div>
+      </div>
+
+      <div className="mt-12 grid grid-cols-2 gap-3 md:mt-16 md:grid-cols-4 md:gap-4">
+        {stats.map((item, index) => (
+          <MetricItem
+            key={item.label}
+            value={item.value}
+            label={item.label}
+            index={index}
+          />
+        ))}
       </div>
     </section>
   );

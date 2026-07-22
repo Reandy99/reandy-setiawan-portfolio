@@ -4,18 +4,11 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 import {
   AmbientAudioEngine,
-  isAmbientDisabledByUser,
+  readAmbientPreference,
 } from "@/lib/ambient-audio";
 import { cn } from "@/lib/utils";
 
 const BAR_HEIGHTS = [0.35, 0.65, 0.5, 0.8, 0.45, 0.7] as const;
-const INTERACTION_EVENTS = [
-  "pointerdown",
-  "keydown",
-  "wheel",
-  "touchstart",
-  "scroll",
-] as const;
 
 export function AmbientAudioControl() {
   const engineRef = useRef<AmbientAudioEngine | null>(null);
@@ -32,53 +25,28 @@ export function AmbientAudioControl() {
     };
 
     updateMotionPreference();
-    setIsReady(true);
+    mediaQuery.addEventListener("change", updateMotionPreference);
 
-    const shouldAutoStart = () => {
-      return !isAmbientDisabledByUser() && !mediaQuery.matches;
-    };
+    const readyFrame = requestAnimationFrame(() => {
+      setIsReady(true);
+    });
 
-    const tryStart = async () => {
-      const engine = engineRef.current;
-      if (!engine || !shouldAutoStart() || engine.isPlaying) {
-        return false;
+    const restorePreference = async () => {
+      if (!readAmbientPreference() || mediaQuery.matches) {
+        return;
       }
 
-      const didPlay = await engine.play();
+      const didPlay = await engineRef.current?.play();
       if (didPlay) {
         setIsPlaying(true);
       }
-
-      return didPlay;
     };
 
-    const startOnInteraction = () => {
-      void tryStart();
-    };
-
-    const listeners: Array<{
-      eventName: (typeof INTERACTION_EVENTS)[number];
-      handler: () => void;
-    }> = [];
-
-    if (shouldAutoStart()) {
-      void tryStart();
-
-      for (const eventName of INTERACTION_EVENTS) {
-        window.addEventListener(eventName, startOnInteraction, { passive: true });
-        listeners.push({ eventName, handler: startOnInteraction });
-      }
-    }
-
-    mediaQuery.addEventListener("change", updateMotionPreference);
+    void restorePreference();
 
     return () => {
+      cancelAnimationFrame(readyFrame);
       mediaQuery.removeEventListener("change", updateMotionPreference);
-
-      for (const { eventName, handler } of listeners) {
-        window.removeEventListener(eventName, handler);
-      }
-
       engineRef.current?.dispose();
       engineRef.current = null;
     };

@@ -3,32 +3,48 @@ import Link from "next/link";
 import { siteConfig } from "@/lib/utils";
 
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-black/6">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 sm:px-5 md:flex-row md:items-center md:justify-between md:px-8">
-        <div className="flex items-center gap-3">
-          <span className="flex h-8 w-8 items-center justify-center rounded-md border border-black/10 bg-white text-[11px] font-semibold text-[var(--color-foreground)]">
+    <footer className="border-t border-white/8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-8 sm:px-5 md:flex-row md:items-center md:justify-between md:px-8">
+        <div className="flex items-start gap-3">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-[var(--color-surface)] text-[11px] font-semibold tracking-[0.08em] text-[var(--color-foreground)]">
             RS
           </span>
-          <p className="text-xs text-[var(--color-muted)]">
-            © 2026 Reandy Setiawan. All rights reserved.
-          </p>
+          <div className="space-y-1">
+            <p className="text-sm font-medium text-[var(--color-foreground)]">
+              {siteConfig.name}
+            </p>
+            <p className="text-xs text-[var(--color-muted)]">{siteConfig.role}</p>
+            <p className="text-xs text-[var(--color-muted)]">
+              © {year} {siteConfig.name}. All rights reserved.
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-4">
           <a
-            href={siteConfig.github}
+            href={siteConfig.linkedin}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="text-xs text-[var(--color-muted)] transition hover:text-[var(--color-foreground)]"
           >
-            GitHub
+            LinkedIn
+          </a>
+          <a
+            href={siteConfig.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-[var(--color-muted)] transition hover:text-[var(--color-foreground)]"
+          >
+            Instagram
           </a>
           <Link
-            href="/"
+            href="/#home"
             className="text-xs text-[var(--color-muted)] transition hover:text-[var(--color-foreground)]"
           >
-            Top ↑
+            Back to top ↑
           </Link>
         </div>
       </div>
