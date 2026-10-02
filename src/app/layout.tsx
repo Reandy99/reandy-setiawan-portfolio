@@ -3,6 +3,7 @@ import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
 
 import { AmbientAudioControl } from "@/components/AmbientAudioControl";
 import { Footer } from "@/components/Footer";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { Navbar } from "@/components/Navbar";
 import { SiteBackground } from "@/components/SiteBackground";
 import { siteConfig } from "@/lib/utils";
@@ -82,6 +83,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+        <GoogleAnalytics />
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
