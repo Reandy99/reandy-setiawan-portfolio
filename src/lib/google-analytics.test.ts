@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { isGoogleAnalyticsMeasurementId } from "@/lib/google-analytics";
+import {
+  googleAnalyticsScriptStrategy,
+  isGoogleAnalyticsMeasurementId,
+} from "@/lib/google-analytics";
 
 describe("isGoogleAnalyticsMeasurementId", () => {
   it("accepts a GA4 measurement ID", () => {
@@ -11,5 +14,9 @@ describe("isGoogleAnalyticsMeasurementId", () => {
     expect(isGoogleAnalyticsMeasurementId("UA-12345-1")).toBe(false);
     expect(isGoogleAnalyticsMeasurementId("G-INVALID-ID")).toBe(false);
     expect(isGoogleAnalyticsMeasurementId(undefined)).toBe(false);
+  });
+
+  it("loads the tag in the document head for Search Console verification", () => {
+    expect(googleAnalyticsScriptStrategy).toBe("beforeInteractive");
   });
 });

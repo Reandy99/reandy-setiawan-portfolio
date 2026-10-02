@@ -78,12 +78,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
+      <head>
+        <GoogleAnalytics />
+      </head>
       <body className={`${manrope.variable} ${plusJakartaSans.variable} font-sans antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        <GoogleAnalytics />
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
