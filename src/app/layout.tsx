@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { Navbar } from "@/components/Navbar";
 import { SiteBackground } from "@/components/SiteBackground";
+import { googleSearchConsoleVerificationToken } from "@/lib/search-console";
 import { siteConfig } from "@/lib/utils";
 
 import "./globals.css";
@@ -51,6 +52,9 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     images: ["/opengraph-image"],
+  },
+  verification: {
+    google: googleSearchConsoleVerificationToken,
   },
 };
 
