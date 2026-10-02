@@ -7,6 +7,9 @@ import { siteConfig } from "@/content/site";
 
 const beholdScriptId = "behold-widget-script";
 
+export const instagramFeedFrameClassName =
+  "w-full rounded-[24px] border border-white/9 bg-[var(--color-surface)] p-3 sm:p-4 md:mx-auto md:max-w-[760px]";
+
 export function InstagramFeed() {
   useEffect(() => {
     if (document.getElementById(beholdScriptId)) {
@@ -38,7 +41,7 @@ export function InstagramFeed() {
         </a>
       </div>
 
-      <div className="min-h-[240px] rounded-[24px] border border-white/9 bg-[var(--color-surface)] p-3 sm:p-4">
+      <div className={instagramFeedFrameClassName}>
         {createElement("behold-widget", {
           "feed-id": siteConfig.instagramFeedId,
           className: "block min-h-[200px] w-full",
