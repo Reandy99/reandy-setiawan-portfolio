@@ -16,6 +16,7 @@ export const siteConfig = {
   linkedin:
     "https://www.linkedin.com/in/reandy-setiawan?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
   instagram: "https://www.instagram.com/reandysetiawan/",
+  instagramFeedId: "9hgQ9CGQzh3r8TaSVhGj",
   github: "https://github.com/Reandy99/reandy-setiawan-portfolio",
   baseUrl: "https://reandysetiawan.my.id",
   cvPath: "/assets/resume/reandy-setiawan-cv.pdf",

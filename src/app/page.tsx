@@ -4,6 +4,7 @@ import { ContactCTA } from "@/components/ContactCTA";
 import { EducationCertification } from "@/components/EducationCertification";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { Hero } from "@/components/Hero";
+import { InstagramFeed } from "@/components/InstagramFeed";
 import { PortfolioEcosystem } from "@/components/PortfolioEcosystem";
 import { SelectedWork } from "@/components/SelectedWork";
 import { SkillGroups } from "@/components/SkillGroups";
@@ -19,6 +20,7 @@ export default function HomePage() {
     <>
       <Hero />
       <SelectedWork projects={visibleProjects} />
+      <InstagramFeed />
       <PortfolioEcosystem />
       <Capabilities />
       <WorkflowDiagram />

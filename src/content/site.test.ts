@@ -14,4 +14,8 @@ describe("site content", () => {
       "contact",
     ]);
   });
+
+  it("keeps the approved Behold feed identifier", () => {
+    expect(siteConfig.instagramFeedId).toBe("9hgQ9CGQzh3r8TaSVhGj");
+  });
 });
